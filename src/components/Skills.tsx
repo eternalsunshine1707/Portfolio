@@ -6,11 +6,12 @@ const skills = [
   "Python", "SQL", "AWS", "Spark", "PySpark", "Airflow", 
   "Snowflake", "Databricks", "ETL", "Data Warehousing",
   "Docker", "Kubernetes", "Git", "Jenkins", "HTML",
-  "Data Modeling", "CSS", "Big Data", "Hadoop",
+  "Data Modeling", "CSS", "Big Data","Apache Flink", "Hadoop",
   "JavaScript", "React", "MongoDB", "Redshift", "Glue",
-  "Machine Learning", "Golang", "Data Analytics", "C++",
-  "Shell Scripting", "Linux", "R", "CI/CD", "Lambda",
-  "EMR"
+  "Machine Learning", "Golang", "Data Analytics", "C++", "Linux", "R", "CI/CD", "Lambda",
+  "EMR","DynamoDB", "Tableau", "Power BI",
+  "REST APIs", "NoSQL", "PostgreSQL", "MySQL", "Redis", "Kafka",
+  "ElasticSearch", "Apache Iceberg", "Great Expectations", "dbt", "Terraform"
 ];
 
 const Skills = () => {
@@ -205,7 +206,7 @@ const Skills = () => {
                   className="text-3xl font-bold text-cyan-400 mb-2"
                   whileHover={{ scale: 1.1 }}
                 >
-                  4+
+                  6+
                 </motion.div>
                 <div className="text-sm text-white">
                   Years of Experience
@@ -227,39 +228,76 @@ const Skills = () => {
               >
                 Certifications
               </motion.h3>
-              <motion.a
-                href="https://www.credly.com/badges/aws-certified-cloud-practitioner"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                className="block"
-              >
-                <motion.div
-                  className="relative group"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
+              <div className="flex flex-col items-center gap-8">
+                {/* AWS Data Engineer Associate Badge */}
+                <motion.a
+                  href="https://www.credly.com/badges/0e2e7e2d-aws-data-engineer-associate-badge-url" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  className="block"
                 >
-                  <motion.img
-                    src="/AWS-Certified-Cloud-Practitioner_badge.634f8a21af2e0e956ed8905a72366146ba22b74c.png"
-                    alt="AWS Certified Cloud Practitioner"
-                    className="w-48 h-48 mx-auto"
-                    whileHover={{ 
-                      scale: 1.1,
-                      rotate: [0, 5, -5, 0],
-                      transition: { duration: 0.5 }
-                    }}
-                  />
                   <motion.div
-                    className="mt-4 text-center"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
+                    className="relative group"
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <h4 className="text-white font-medium">AWS Certified Cloud Practitioner</h4>
-                    <p className="text-gray-400 text-sm mt-1">Issued by Amazon Web Services</p>
+                    <motion.img
+                      src="./DE.webp" 
+                      alt="AWS Certified Data Engineer – Associate"
+                      className="w-48 h-48 mx-auto"
+                      whileHover={{
+                        scale: 1.1,
+                        rotate: [0, 5, -5, 0],
+                        transition: { duration: 0.5 }
+                      }}
+                    />
+                    <motion.div
+                      className="mt-4 text-center"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <h4 className="text-white font-medium">AWS Certified Data Engineer - Associate</h4>
+                      <p className="text-gray-400 text-sm mt-1">Issued by Amazon Web Services</p>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              </motion.a>
+                </motion.a>
+                {/* AWS Cloud Practitioner Badge */}
+                <motion.a
+                  href="https://www.credly.com/badges/b430e396-bc09-4857-82a5-920be64ccc0b/public_url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  className="block"
+                >
+                  <motion.div
+                    className="relative group"
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.img
+                      src="./AWS-Certified-Cloud-Practitioner_badge.634f8a21af2e0e956ed8905a72366146ba22b74c.png"
+                      alt="AWS Certified Cloud Practitioner"
+                      className="w-48 h-48 mx-auto"
+                      whileHover={{
+                        scale: 1.1,
+                        rotate: [0, 5, -5, 0],
+                        transition: { duration: 0.5 }
+                      }}
+                    />
+                    <motion.div
+                      className="mt-4 text-center"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <h4 className="text-white font-medium">AWS Certified Cloud Practitioner</h4>
+                      <p className="text-gray-400 text-sm mt-1">Issued by Amazon Web Services</p>
+                    </motion.div>
+                  </motion.div>
+                </motion.a>
+              </div>
             </motion.div>
           </div>
         </div>

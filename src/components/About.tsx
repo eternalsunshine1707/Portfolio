@@ -1,6 +1,14 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
+
+const SLIDES = [
+  { src: './Kutty1.jpeg', alt: 'Kutty' },
+  { src: './Kutty2.jpeg', alt: 'Kutty scaring the reptile!' },
+  { src: './Kutty3.jpeg', alt: 'Delusional Kutty' },
+  { src: './Kutty4.jpeg', alt: 'Dramebaaz Kutty' },
+  { src: './Kutty5.jpeg', alt: 'WTF Kutty' },
+];
 
 const About = () => {
   const containerRef = useRef(null);
@@ -18,6 +26,16 @@ const About = () => {
     triggerOnce: true,
     threshold: 0.2,
   });
+
+  // Slideshow state
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSlide((prev) => (prev + 1) % SLIDES.length);
+    }, 4000); // Changed interval to 4 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section id="about-me" className="min-h-screen bg-dark-950 py-24 overflow-hidden" ref={containerRef}>
@@ -51,7 +69,7 @@ const About = () => {
                 ease: "easeOut",
                 opacity: { duration: 2 }
               }}
-              className="floating-image h-full relative overflow-hidden rounded-2xl"
+              className="floating-image h-full relative overflow-hidden rounded-2xl" // Removed any shadow classes here
               style={{ 
                 scale,
                 rotateZ: rotate
@@ -61,16 +79,30 @@ const About = () => {
                 transition: { duration: 0.3 }
               }}
             >
+              {/* Slideshow */}
               <motion.img
-                src="/Kutty.jpeg"
-                alt="Portrait"
-                className="w-full object-cover transition-all duration-300"
+                key={SLIDES[slide].src}
+                src={SLIDES[slide].src}
+                alt={SLIDES[slide].alt}
+                className="w-full object-cover transition-all duration-500" // No shadow class here
                 style={{ height: '100vh' }}
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { duration: 0.5 }
-                }}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 0.7 }}
               />
+              {/* Dots navigation */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {SLIDES.map((_, idx) => (
+                  <button
+                    key={idx}
+                    className={`w-2.5 h-2.5 rounded-full ${slide === idx ? 'bg-cyan-400' : 'bg-white/30'} border-none outline-none transition-colors`}
+                    style={{ boxShadow: slide === idx ? '0 0 6px #22d3ee' : undefined }}
+                    onClick={() => setSlide(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
               <div className="gradient-overlay" />
             </motion.div>
           </motion.div>

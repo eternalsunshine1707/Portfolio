@@ -73,18 +73,6 @@ const Hero = () => {
               transition={{ delay: 0.5 }}
               className="flex flex-col sm:flex-row items-center gap-6"
             >
-              <motion.a
-                href="/Sravani_B_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center space-x-2 px-8 py-4 bg-gradient-to-r from-cyan-400 to-cyan-500 text-dark-950 rounded-lg font-semibold hover:from-cyan-300 hover:to-cyan-400 transition-all duration-300 shadow-lg shadow-cyan-500/25 w-full sm:w-auto"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FileText className="w-5 h-5" />
-                <span>Download Resume</span>
-              </motion.a>
-
               <div className="flex items-center gap-4">
                 <motion.a
                   href="mailto:sravanistar99@gmail.com"

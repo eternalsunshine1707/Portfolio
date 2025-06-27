@@ -53,7 +53,7 @@ const projects: Project[] = [
     id: 3,
     title: "Assembly Language Based Computer Simulator",
     description: "The project's goal is to create an assembly language-based simulator of a modest traditional CISC computer, developing a comprehensive understanding of computer systems' internal design. The simulator includes key components: basic machine design with simple memory, load/store instructions, and an initial interface; enhanced memory and cache modules with a program demonstration; and advanced features like floating-point/vector operations and enhanced scheduling with branch prediction.",
-    image: "/CISC.png",
+    image: "./CISC.png",
     technologies: [
       { name: "Assembly", color: "bg-gray-500" },
       { name: "Java", color: "bg-red-500" },

@@ -24,8 +24,8 @@ const educationData: EducationEntry[] = [
   {
     id: 1,
     institution: "The George Washington University",
-    logo: "/GWU.jpg",
-    duration: "Aug 2023 - May 2025 (Expected)",
+    logo: "./GWU.jpg",
+    duration: "Aug 2023 - May 2025",
     degree: "Master of Science",
     major: "Computer Science",
     location: "Washington, DC",
@@ -43,7 +43,7 @@ const educationData: EducationEntry[] = [
   {
     id: 2,
     institution: "Kakatiya Institute of Technology & Science",
-    logo: "/KITS_Warangal.jpeg",
+    logo: "./KITS_Warangal.jpeg",
     duration: "Aug 2014 - May 2018",
     degree: "Bachelor of Technology",
     major: "Computer Science and Engineering",

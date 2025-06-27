@@ -18,29 +18,29 @@ const timelineData: TimelineEntry[] = [
   {
     id: 1,
     company: "DXC Technology",
-    logo: "/DXC.png",
-    duration: "Oct 2018 - Dec 2022 (4 years 3 months)",
+    logo: "./DXC.png",
+    duration: "May 2018 - Jun 2023 (5 years 1 month)",
     position: "Data Engineer",
     location: "Hyderabad, India",
     responsibilities: [
-      "Designed a data pipeline using AWS components for an internal project called Titian, improving pipeline efficiency by 30% through the integration of Lambda functions with CRON triggers and optimization of Glue jobs",
-      "Recommended cost-efficient methods for data pipelines, reducing computing costs by 20%",
-      "Architected and deployed a serverless solution utilizing API Gateway, DynamoDB and deployed AWS Lambda code via AWS S3",
-      "Enhanced Spark workflows using PySpark and SQL to extract and process data from S3 buckets efficiently",
-      "Leveraged a wide range of AWS services to build robust and scalable data solutions, including VPC, EC2, SQS, DynamoDB, Lambda, Step Functions, Glue, Athena, and Glue Crawlers",
-      "Engineered a Publishing Reschedule Lambda function to ensure job completion before data publishing to Titian",
-      "Performed ETL operations to support new use cases, including adding attributes to Titian Onelake datasets, grouping datasets, writing SQLs, Spark notebooks, and conducting data validations and quality checks",
-      "Utilized Databricks for analytical operations, including duplicate detection, occupancy analysis, and pre-validation tasks",
-      "Employed Snowflake to create customized tables and views based on business requirements, facilitating efficient downstream data consumption",
-      "Implemented comprehensive data quality checks and validation procedures for pipeline configurations, ensuring data integrity and seamless consumer streaming"
+      "Reduced daily data processing time by 35% (from 10 to 6.5 hours) by architecting and deploying an automated ETL pipeline using AWS Glue, Lambda (CRON), Step Functions, and S3, enabling early access to insights for 4 downstream teams.",
+      "Boosted data reliability and maintainability by developing modular SQL models in dbt Cloud integrated with Snowflake, transforming raw data into structured datasets for analytics and reducing ad hoc query dependency.",
+      "Optimized PySpark jobs by rewriting legacy SQL transformations using caching, bucketing, and repartitioning, cutting query execution time by over 40% and enhancing pipeline performance.",
+      "Saved ~$1,500/month in infrastructure costs by replacing EC2-based ingestion with a serverless architecture (API Gateway, Lambda, DynamoDB, and S3), increasing pipeline scalability and reducing operational overhead.",
+      "Improved SLA adherence by 98% by developing a smart “Publishing Reschedule Lambda” microservice that validated job dependencies and dynamically delayed broken publish events.",
+      "Streamlined onboarding for 12+ new datasets using modular data pipelines in Python, SQL, and PySpark, applying reusable job templates that cut engineering effort by 60%.",
+      "Enabled high availability for analytics pipelines by designing a cross-cloud ingestion framework with Apache Iceberg, syncing datasets across AWS S3 and Azure Blob Storage.",
+      "Built resilient Airflow DAGs to orchestrate multi-stage ETL workflows, simplifying error recovery and increasing pipeline reliability across dynamic ingestion layers.",
+      "Improved dashboard load times by up to 5 minutes/report by building 10+ business-facing data marts in Snowflake, leveraging warehouse optimization and caching strategies for BI tools like Tableau and Power BI.",
+      "Enhanced data integrity (>99.5% accuracy) by implementing data contracts and validations using Great Expectations, dbt tests, PySpark, and SQL-based reconciliation for production pipelines."
     ],
     isCurrentPosition: false
   },
   {
     id: 2,
     company: "Aditya Birla Group",
-    logo: "/Aditya_Birla_Group_Logo.png",
-    duration: "May 2018 - Aug 2018 (4 months)",
+    logo: "./Aditya_Birla_Group_Logo.png",
+    duration: "May 2017 - Aug 2017 (4 months)",
     position: "Software Development Intern",
     location: "Hyderabad, India",
     responsibilities: [
@@ -53,7 +53,7 @@ const timelineData: TimelineEntry[] = [
   {
     id: 3,
     company: "Kakatiya Institute of Technology & Science",
-    logo: "/KITSW_OfficiaLogo.png",
+    logo: "./KITSW_OfficiaLogo.png",
     duration: "Aug 2016 - Oct 2017 (1 year 3 months)",
     position: "Student Technical Assistant",
     location: "Warangal, India",
