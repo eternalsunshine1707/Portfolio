@@ -101,8 +101,8 @@ const Projects = () => {
                 >
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent opacity-60 z-10"
-                    initial={{ opacity: 0.6 }}
-                    animate={{ opacity: hoveredId === project.id ? 0.3 : 0.6 }}
+                    initial={{ opacity: 0.28 }}
+                    animate={{ opacity: hoveredId === project.id ? 0.12 : 0.28 }}
                     transition={{ duration: 0.3 }}
                   />
                   <img

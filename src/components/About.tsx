@@ -55,7 +55,7 @@ const About = () => {
             animate={{ opacity: inView ? 1 : 0 }}
             transition={{ duration: 2 }}
             style={{ y, opacity }}
-            className="portrait-container w-full lg:w-[30%] h-auto relative bg-dark-950"
+            className="portrait-container w-full lg:w-[30%] h-auto relative z-10"
           >
             <motion.div
               initial={{ scale: 0.95, x: -20, opacity: 0 }}
@@ -69,7 +69,7 @@ const About = () => {
                 ease: "easeOut",
                 opacity: { duration: 2 }
               }}
-              className="floating-image h-full relative overflow-hidden rounded-2xl" // Removed any shadow classes here
+              className="floating-image h-full relative overflow-hidden rounded-2xl"
               style={{ 
                 scale,
                 rotateZ: rotate
@@ -84,8 +84,7 @@ const About = () => {
                 key={SLIDES[slide].src}
                 src={SLIDES[slide].src}
                 alt={SLIDES[slide].alt}
-                className="w-full object-cover transition-all duration-500" // No shadow class here
-                style={{ height: '100vh' }}
+                className="w-full h-[440px] md:h-[560px] lg:h-[680px] object-cover object-center transition-all duration-500"
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.02 }}
@@ -103,7 +102,6 @@ const About = () => {
                   />
                 ))}
               </div>
-              <div className="gradient-overlay" />
             </motion.div>
           </motion.div>
 

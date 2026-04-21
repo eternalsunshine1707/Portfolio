@@ -71,7 +71,7 @@ const timelineData: TimelineEntry[] = [
 
 const Experience = () => {
   const [ref, inView] = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 

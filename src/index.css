@@ -2,55 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+#root {
+  margin: 0;
+  background-color: #050505;
+}
+
 .portrait-container {
   position: relative;
 }
 
 .portrait-container::before,
-.portrait-container::after,
-.portrait-container .gradient-overlay {
+.portrait-container::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
 .portrait-container::before {
   background: linear-gradient(
     to bottom,
-    rgb(5, 5, 5) 0%,
-    rgba(5, 5, 5, 0.95) 5%,
-    rgba(5, 5, 5, 0.85) 10%,
-    rgba(5, 5, 5, 0) 25%,
-    rgba(5, 5, 5, 0) 75%,
-    rgba(5, 5, 5, 0.85) 90%,
-    rgba(5, 5, 5, 0.95) 95%,
-    rgb(5, 5, 5) 100%
+    rgba(5, 5, 5, 0.28) 0%,
+    rgba(5, 5, 5, 0) 16%,
+    rgba(5, 5, 5, 0) 84%,
+    rgba(5, 5, 5, 0.28) 100%
   );
 }
 
 .portrait-container::after {
   background: linear-gradient(
     to right,
-    rgb(5, 5, 5) 0%,
-    rgba(5, 5, 5, 0.95) 5%,
-    rgba(5, 5, 5, 0) 20%,
-    rgba(5, 5, 5, 0) 80%,
-    rgba(5, 5, 5, 0.95) 95%,
-    rgb(5, 5, 5) 100%
+    rgba(5, 5, 5, 0.22) 0%,
+    rgba(5, 5, 5, 0) 12%,
+    rgba(5, 5, 5, 0) 88%,
+    rgba(5, 5, 5, 0.22) 100%
   );
-}
-
-.portrait-container .gradient-overlay {
-  background: radial-gradient(
-    circle at center,
-    rgba(5, 5, 5, 0) 30%,
-    rgba(5, 5, 5, 0.3) 60%,
-    rgba(5, 5, 5, 0.6) 80%,
-    rgba(5, 5, 5, 0.8) 100%
-  );
-  mix-blend-mode: multiply;
 }
 
 @keyframes float {
