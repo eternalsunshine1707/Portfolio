@@ -17,18 +17,47 @@ interface TimelineEntry {
 const timelineData: TimelineEntry[] = [
   {
     id: 1,
+    company: "Tidel Enterprise Inc",
+    logo: "./Tidel.jpeg",
+    duration: "Apr 2026 - Present",
+    position: "Data Analyst",
+    location: "Remote, USA",
+    responsibilities: [
+      "Built Power BI dashboards tracking key business metrics across 3+ teams, replacing manual reporting and saving 4-6 hours per week through Python and BI automation.",
+      "Processed and cleaned 50K+ records using Python (Pandas), Excel, and Google Sheets, improving data quality and reliability for downstream analysis.",
+      "Supported A/B testing analysis to drive data-backed business decisions across product and operations teams."
+    ],
+    isCurrentPosition: false
+  },
+  {
+    id: 2,
+    company: "Drunix Solutions",
+    logo: "./Drunix.jpeg",
+    duration: "Jun 2026 - Mar 2026 (10 months)",
+    position: "Software Developer - Data",
+    location: "Remote, USA",
+    responsibilities: [
+      "Developed a Slack bot and web application using React and AWS, managing 6+ feature releases via Git branching and code reviews, ensuring stable production-ready deployments.",
+      "Streamlined CI/CD pipelines using Git and Jenkins, cutting deployment times by 30% and accelerating release turnaround.",
+      "Resolved 13+ high-severity production incidents through root cause analysis and debugging, restoring system stability with zero repeat failures."
+    ],
+    isCurrentPosition: false
+  },
+  {
+    id: 3,
     company: "DXC Technology",
     logo: "./DXC.png",
     duration: "May 2018 - Jun 2023 (5 years 1 month)",
     position: "Data Engineer",
     location: "Hyderabad, India",
     responsibilities: [
-      "Reduced daily data processing time by 35% (from 10 to 6.5 hours) by architecting and deploying an automated ETL pipeline using AWS Glue, Lambda (CRON), Step Functions, and S3, enabling early access to insights for 4 downstream teams.",
+      "Reduced daily data processing time by 35% (from 10 to 6.5 hours) by architecting and deploying an automated ETL pipeline for Zurich Insurance's Titian platform using AWS Glue, Lambda (CRON), Step Functions, and S3, enabling early access to insights for 4 downstream teams.",
       "Boosted data reliability and maintainability by developing modular SQL models in dbt Cloud integrated with Snowflake, transforming raw data into structured datasets for analytics and reducing ad hoc query dependency.",
-      "Optimized PySpark jobs by rewriting legacy SQL transformations using caching, bucketing, and repartitioning, cutting query execution time by over 40% and enhancing pipeline performance.",
-      "Saved ~$1,500/month in infrastructure costs by replacing EC2-based ingestion with a serverless architecture (API Gateway, Lambda, DynamoDB, and S3), increasing pipeline scalability and reducing operational overhead.",
+      "Optimized PySpark jobs by rewriting legacy SQL transformations using caching, bucketing, and repartitioning, cutting query execution time from 15 minutes to under 9 minutes and enhancing performance across all Zurich's insurance platforms.",
+      "Saved ~$7,500/month in infrastructure costs by replacing EC2-based ingestion with a serverless architecture (API Gateway, Lambda, DynamoDB, and S3), increasing pipeline scalability and reducing operational overhead.",
       "Improved SLA adherence by 98% by developing a smart “Publishing Reschedule Lambda” microservice that validated job dependencies and dynamically delayed broken publish events.",
-      "Streamlined onboarding for 12+ new datasets using modular data pipelines in Python, SQL, and PySpark, applying reusable job templates that cut engineering effort by 60%.",
+      "Automated data ingestion pipelines in Databricks processing 1M+ records/day from raw S3 files into Bronze/Silver/Gold layers for Zurich's analytics platform, improving query readiness and shortening dashboard refresh cycles.",
+      "Built 20+ reusable Spark notebooks for the Titian data lake supporting new insurance business use cases - cutting onboarding time for new data sources by 60%.",
       "Enabled high availability for analytics pipelines by designing a cross-cloud ingestion framework with Apache Iceberg, syncing datasets across AWS S3 and Azure Blob Storage.",
       "Built resilient Airflow DAGs to orchestrate multi-stage ETL workflows, simplifying error recovery and increasing pipeline reliability across dynamic ingestion layers.",
       "Improved dashboard load times by up to 5 minutes/report by building 10+ business-facing data marts in Snowflake, leveraging warehouse optimization and caching strategies for BI tools like Tableau and Power BI.",
@@ -37,33 +66,33 @@ const timelineData: TimelineEntry[] = [
     isCurrentPosition: false
   },
   {
-    id: 2,
+    id: 4,
     company: "Aditya Birla Group",
     logo: "./Aditya_Birla_Group_Logo.png",
     duration: "May 2017 - Aug 2017 (4 months)",
     position: "Software Development Intern",
     location: "Hyderabad, India",
     responsibilities: [
-      "Developed an Android application that can search and output all the relevant books for the given input image (using the author's name as a reference) using optimal character recognition",
-      "Achieved an accuracy of 90% from this application, by extracting the text from processing the image & later using various APIs like Google and Amazon to search the relevant books",
-      "Responsible for maintaining & supporting a real-time project on Traffic Monitoring"
+      "Developed an Android application that can search and output all the relevant books for the given input image (using the author's name as a reference) using optimal character recognition.",
+      "Achieved an accuracy of 90% from this application, by extracting the text from processing the image & later using various APIs like Google and Amazon to search the relevant books.",
+      "Responsible for maintaining & supporting a real-time project on Traffic Monitoring."
     ],
     isCurrentPosition: false
   },
   {
-    id: 3,
+    id: 5,
     company: "Kakatiya Institute of Technology & Science",
     logo: "./KITSW_OfficiaLogo.png",
     duration: "Aug 2016 - Oct 2017 (1 year 3 months)",
     position: "Student Technical Assistant",
     location: "Warangal, India",
     responsibilities: [
-      "Managed and led the technical team of 16 members during the placement season",
-      "Coordinated with over 800+ students, faculty, and recruiters to ensure seamless placement activities",
-      "Oversaw technical setup for coding rounds, ensuring all systems were fully operational",
-      "Configured software and managed network resources for over 50 workstations to support placement activities",
-      "Provided in-person technical support, troubleshooting, and resolving technical issues promptly",
-      "Ensured minimal disruption by offering timely and effective solutions, resulting in a 95% satisfaction rate"
+      "Managed and led the technical team of 16 members during the placement season.",
+      "Coordinated with over 800+ students, faculty, and recruiters to ensure seamless placement activities.",
+      "Oversaw technical setup for coding rounds, ensuring all systems were fully operational.",
+      "Configured software and managed network resources for over 50 workstations to support placement activities.",
+      "Provided in-person technical support, troubleshooting, and resolving technical issues promptly.",
+      "Ensured minimal disruption by offering timely and effective solutions, resulting in a 95% satisfaction rate."
     ],
     isCurrentPosition: false
   }

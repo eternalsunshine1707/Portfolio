@@ -8,10 +8,11 @@ interface Portfolio {
 
 const sravani: Portfolio = {
   'Data Engineer': '',
+  'Data Analyst': '',
+  'AWS Certified': '',
   'Pipeline Architect': '',
   'ETL Optimizer': '',
   'Problem Solver': '',
-  'Artistic Soul': '',
   'Writer': '',
   'Eternal Dreamer': '',
   'Sugar, Spice & Everything Nice': '',
@@ -59,11 +60,11 @@ const Hero = () => {
               className="space-y-6 text-base text-gray-300 leading-relaxed mb-12 max-w-3xl"
             >
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-                I enjoy creating things that live on the Internet. With over 4 years of experience in Data Engineering from my tenure at DXC Technology, I bring a strong foundation in building efficient data solutions. Currently, I'm pursuing my Master's in Computer Science at George Washington University, to continue pushing the boundaries of what's possible. I'm actively exploring full-time Data Engineering roles to kick off after graduation.
+                I enjoy creating things that live on the Internet. With 7+ years of experience across Data Engineering and Analytics, I've designed pipelines that move millions of records, built dashboards that help teams make faster decisions, and automated workflows that save hours every week. Whether it's architecting an ETL pipeline from scratch or digging into messy data to find the story it's trying to tell - I'm equally at home in both worlds. Currently, I'm actively exploring full-time roles in Data Engineering and Data Analytics.
               </motion.p>
 
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-                Believe your data deserves better engineering or are you looking for a Data Engineer who thinks beyond the pipeline!? You are in the right place. Let's talk!
+                Believe your data deserves better engineering or cleaner insights!? You are in the right place. Let's talk!
               </motion.p>
             </motion.div>
 
