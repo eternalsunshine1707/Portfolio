@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { MapPin } from 'lucide-react';
+import { MapPin, ChevronDown } from 'lucide-react';
 
 interface TimelineEntry {
   id: number;
@@ -104,6 +104,14 @@ const Experience = () => {
     threshold: 0.1,
   });
 
+  const [expandedEntries, setExpandedEntries] = useState<number[]>([]);
+
+  const toggleDetails = (id: number) => {
+    setExpandedEntries((prev) =>
+      prev.includes(id) ? prev.filter((entryId) => entryId !== id) : [...prev, id]
+    );
+  };
+
   return (
     <section id="experience" className="min-h-screen bg-dark-950 py-24 relative overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
@@ -197,14 +205,41 @@ const Experience = () => {
                       <MapPin size={14} className="mr-1" />
                       {entry.location}
                     </p>
-                    <ul className="space-y-2">
-                      {entry.responsibilities.map((responsibility, idx) => (
-                        <li key={idx} className="text-gray-300 text-sm flex items-start">
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 mr-2 flex-shrink-0" />
-                          {responsibility}
-                        </li>
-                      ))}
-                    </ul>
+
+                    <div className="mt-4">
+                      <button
+                        type="button"
+                        onClick={() => toggleDetails(entry.id)}
+                        className="flex items-center justify-between w-full text-white hover:text-cyan-400 transition-colors"
+                      >
+                        <span className="font-medium">Responsibilities</span>
+                        <ChevronDown
+                          className={`transform transition-transform ${
+                            expandedEntries.includes(entry.id) ? 'rotate-180' : ''
+                          }`}
+                          size={20}
+                        />
+                      </button>
+
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          height: expandedEntries.includes(entry.id) ? 'auto' : 0,
+                          opacity: expandedEntries.includes(entry.id) ? 1 : 0
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <ul className="mt-4 space-y-2">
+                          {entry.responsibilities.map((responsibility, idx) => (
+                            <li key={idx} className="text-gray-300 text-sm flex items-start">
+                              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 mr-2 flex-shrink-0" />
+                              {responsibility}
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    </div>
                   </motion.div>
                 </div>
               </motion.div>

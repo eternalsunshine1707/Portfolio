@@ -206,7 +206,7 @@ const Skills = () => {
                   className="text-3xl font-bold text-cyan-400 mb-2"
                   whileHover={{ scale: 1.1 }}
                 >
-                  6+
+                  7+
                 </motion.div>
                 <div className="text-sm text-white">
                   Years of Experience
