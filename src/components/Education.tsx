@@ -28,7 +28,7 @@ const educationData: EducationEntry[] = [
     duration: "Aug 2023 - May 2025",
     degree: "Master of Science",
     major: "Computer Science",
-    location: "Washington, DC",
+    location: "Washington, DC, USA",
     courses: [
       { name: "Machine Learning", description: "Machine learning algorithms, neural networks, and practical applications" },
       { name: "Intro to Big Data & Analytics", description: "Big data processing, analytics frameworks, and data visualization" },

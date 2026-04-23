@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { MapPin, ChevronDown } from 'lucide-react';
 
@@ -99,12 +99,20 @@ const timelineData: TimelineEntry[] = [
 ];
 
 const Experience = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
   const [expandedEntries, setExpandedEntries] = useState<number[]>([]);
+
+  const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const toggleDetails = (id: number) => {
     setExpandedEntries((prev) =>
@@ -113,7 +121,7 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="min-h-screen bg-dark-950 py-24 relative overflow-hidden">
+    <section id="experience" className="min-h-screen bg-dark-950 py-24 relative overflow-hidden" ref={containerRef}>
       <div className="container mx-auto px-4 lg:px-8">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -126,7 +134,12 @@ const Experience = () => {
 
         <div className="relative" ref={ref}>
           {/* Timeline Line */}
-          <div className="absolute left-8 lg:left-1/3 transform lg:-translate-x-px h-full w-px bg-white/10" />
+          <div className="absolute left-8 lg:left-1/3 transform lg:-translate-x-px h-full w-px bg-white/10">
+            <motion.div
+              className="absolute top-0 left-0 w-full bg-cyan-400"
+              style={{ height: progressHeight }}
+            />
+          </div>
 
           {/* Timeline Entries */}
           <div className="relative space-y-20">
