@@ -73,7 +73,7 @@ const Header = () => {
             >
               {/* Background Circle */}
               <motion.div
-                className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600"
+                className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#6bab8a] to-[#6bab8a]"
                 variants={{
                   hover: {
                     scale: 1.1,
@@ -86,7 +86,7 @@ const Header = () => {
 
               {/* Glowing Effect */}
               <motion.div
-                className="absolute inset-0 rounded-xl bg-cyan-400 blur-md"
+                className="absolute inset-0 rounded-xl bg-[#6bab8a] blur-md"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: [0.2, 0.4, 0.2] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -157,8 +157,8 @@ const Header = () => {
                   onClick={(e) => scrollToSection(e, item.href)}
                   className={`flex items-center space-x-2 py-2 px-3 rounded-lg group relative ${
                     activeSection === item.href 
-                      ? 'text-cyan-400' 
-                      : 'text-white hover:text-cyan-400'
+                      ? 'text-[#6bab8a]'
+                      : 'text-white hover:text-[#6bab8a]'
                   } transition-colors`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -193,7 +193,7 @@ const Header = () => {
                       layoutId="navHighlight"
                       className={`absolute inset-0 rounded-lg -z-10 ${
                         activeSection === item.href 
-                          ? 'bg-cyan-400/10' 
+                          ? 'bg-[#6bab8a]/10'
                           : 'bg-white/5'
                       }`}
                       initial={{ opacity: 0 }}
@@ -211,7 +211,7 @@ const Header = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-white hover:text-cyan-400 transition-colors"
+            className="md:hidden p-2 text-white hover:text-[#6bab8a] transition-colors"
           >
             <div className="space-y-2">
               <motion.div
@@ -258,8 +258,8 @@ const Header = () => {
                     transition={{ delay: index * 0.1 }}
                     className={`flex items-center space-x-2 p-3 rounded-lg ${
                       activeSection === item.href
-                        ? 'text-cyan-400 bg-cyan-400/10'
-                        : 'text-white hover:text-cyan-400 hover:bg-white/5'
+                        ? 'text-[#6bab8a] bg-[#6bab8a]/10'
+                        : 'text-white hover:text-[#6bab8a] hover:bg-white/5'
                     } transition-colors`}
                   >
                     {item.icon}

@@ -95,8 +95,8 @@ const About = () => {
                 {SLIDES.map((_, idx) => (
                   <button
                     key={idx}
-                    className={`w-2.5 h-2.5 rounded-full ${slide === idx ? 'bg-cyan-400' : 'bg-white/30'} border-none outline-none transition-colors`}
-                    style={{ boxShadow: slide === idx ? '0 0 6px #22d3ee' : undefined }}
+                    className={`w-2.5 h-2.5 rounded-full ${slide === idx ? 'bg-[#6bab8a]' : 'bg-white/30'} border-none outline-none transition-colors`}
+                    style={{ boxShadow: slide === idx ? '0 0 6px #6bab8a' : undefined }}
                     onClick={() => setSlide(idx)}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
@@ -120,7 +120,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-cyan-400 text-sm font-medium mb-6"
+                className="text-[#6bab8a] text-sm font-medium mb-6"
               >
                 I'm graduate student pursuing Master's in Computer Science at The George Washington University, and I'm actively exploring new opportunities as a Data Engineer. This website was made to showcase everything I can do and plan to do. Don't judge my writing based on this section, though - this is by far my shoddiest work yet!
               </motion.h3>
@@ -141,7 +141,7 @@ const About = () => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="text-white text-sm leading-relaxed text-justify"
                 >
-                  My love for development, though, started way before this pseudo-perfectionist epiphany. I mean, think about it - "<span className="text-cyan-400">int i = 10;</span>" magically makes a whole integer? Wow! Watching lines of code morph into apps like Facebook or Amazon? Pure magic. That's when I knew: I wanted to be part of this magic, creating things people actually use and love.
+                  My love for development, though, started way before this pseudo-perfectionist epiphany. I mean, think about it - "<span className="text-[#6bab8a]">int i = 10;</span>" magically makes a whole integer? Wow! Watching lines of code morph into apps like Facebook or Amazon? Pure magic. That's when I knew: I wanted to be part of this magic, creating things people actually use and love.
                 </motion.p>
 
                 <motion.p
@@ -162,7 +162,7 @@ const About = () => {
               >
                 <a 
                   href="#contact" 
-                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-cyan-400 to-cyan-500 text-dark-950 rounded-lg font-semibold hover:from-cyan-300 hover:to-cyan-400 transition-all duration-300 shadow-lg shadow-cyan-500/25"
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#6bab8a] to-[#6bab8a] text-dark-950 rounded-lg font-semibold hover:from-[#6bab8a] hover:to-[#6bab8a] transition-all duration-300 shadow-lg shadow-[#6bab8a]/25"
                 >
                   Let's Connect
                 </a>

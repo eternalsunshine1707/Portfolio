@@ -85,7 +85,7 @@ const ContactNetworkCanvas = () => {
             const t = 1 - d / LINK_DISTANCE;
             const alpha = t * BASE_ALPHA;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 188, 212, ${alpha})`;
+            ctx.strokeStyle = `rgba(107, 171, 138, ${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -96,7 +96,7 @@ const ContactNetworkCanvas = () => {
 
       for (const n of nodes) {
         ctx.beginPath();
-        ctx.fillStyle = `rgba(0, 188, 212, ${BASE_ALPHA})`;
+        ctx.fillStyle = `rgba(107, 171, 138, ${BASE_ALPHA})`;
         ctx.arc(n.x, n.y, NODE_RADIUS, 0, Math.PI * 2);
         ctx.fill();
       }

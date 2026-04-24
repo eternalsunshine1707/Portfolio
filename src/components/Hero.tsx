@@ -48,7 +48,7 @@ const Hero = () => {
               className="text-4xl lg:text-6xl font-bold text-white leading-tight mb-8"
             >
               Hi! I'm{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-300">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6bab8a] to-[#6bab8a]">
                 Sravani B
               </span>
             </motion.h1>
@@ -129,7 +129,7 @@ const Hero = () => {
                   href="https://github.com/eternalsunshine1707"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-white/5 hover:bg-white/10 rounded-lg text-white hover:text-cyan-400 transition-colors relative group"
+                  className="p-3 bg-white/5 hover:bg-white/10 rounded-lg text-white hover:text-[#6bab8a] transition-colors relative group"
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -158,10 +158,10 @@ const Hero = () => {
               className="w-full bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 relative overflow-hidden transform transition-transform duration-300"
             >
               {/* Animated Background Grid */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_0%,transparent_49%,rgba(34,211,238,0.1)_50%,transparent_51%,transparent_100%)] bg-[length:40px_40px] animate-[grid_2s_linear_infinite]" />
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_0%,transparent_49%,rgba(107,171,138,0.1)_50%,transparent_51%,transparent_100%)] bg-[length:40px_40px] animate-[grid_2s_linear_infinite]" />
               
               {/* Glowing Line Effect */}
-              <div className="absolute h-px w-full top-0 left-0 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-shimmer" />
+              <div className="absolute h-px w-full top-0 left-0 bg-gradient-to-r from-transparent via-[#6bab8a] to-transparent animate-shimmer" />
               
               <div className="font-mono text-sm relative">
                 <motion.div 
@@ -182,9 +182,9 @@ const Hero = () => {
                   <span className="text-blue-400">sravani</span>
                   <span className="text-white">:</span>{' '}
                   <span className="text-yellow-400">Array</span>
-                  <span className="text-cyan-400">&lt;</span>
+                  <span className="text-[#6bab8a]">&lt;</span>
                   <span className="text-yellow-400">Portfolio</span>
-                  <span className="text-cyan-400">&gt;</span>{' '}
+                  <span className="text-[#6bab8a]">&gt;</span>{' '}
                   <span className="text-white">=</span>{' '}
                   <span className="text-white">[</span>
                 </motion.div>
@@ -215,7 +215,7 @@ const Hero = () => {
                               repeat: Infinity, 
                               repeatType: "reverse" 
                             }}
-                            className="absolute -right-4 top-1/2 -translate-y-1/2 w-2 h-4 bg-cyan-400"
+                            className="absolute -right-4 top-1/2 -translate-y-1/2 w-2 h-4 bg-[#6bab8a]"
                           />
                         )}
                       </span>
@@ -263,7 +263,7 @@ const Hero = () => {
                       repeat: Infinity,
                       repeatType: "loop"
                     }}
-                    className="absolute w-px h-20 bg-gradient-to-b from-transparent via-cyan-400 to-transparent"
+                    className="absolute w-px h-20 bg-gradient-to-b from-transparent via-[#6bab8a] to-transparent"
                     style={{ left: `${i * 10}%` }}
                   />
                 ))}
@@ -279,7 +279,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.2 }}
           transition={{ duration: 1 }}
-          className="absolute w-[500px] h-[500px] -top-48 -right-24 bg-cyan-500/20 rounded-full blur-[120px]"
+          className="absolute w-[500px] h-[500px] -top-48 -right-24 bg-[#6bab8a]/20 rounded-full blur-[120px]"
         />
         <motion.div
           initial={{ opacity: 0 }}

@@ -67,7 +67,7 @@ const Skills = () => {
             repeatType: "reverse",
             ease: "linear"
           }}
-          className="absolute w-[800px] h-[800px] -top-96 -right-96 bg-cyan-500/10 rounded-full blur-[120px]"
+          className="absolute w-[800px] h-[800px] -top-96 -right-96 bg-[#6bab8a]/10 rounded-full blur-[120px]"
         />
         <motion.div
           animate={{
@@ -106,7 +106,7 @@ const Skills = () => {
             animate={inView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Welcome to my tech toolkit! While my expertise lies in Data Engineering, I've explored each of these technologies at some point & have thoroughly enjoyed creating with them. Sure, I won't claim to be a guru in everything (let's keep it real!), but <span className="text-cyan-400 font-medium">here's my secret sauce</span>: Once you truly get what a tool is meant for and why you'd use it, figuring out how is just a matter of resourceful problem-solving! Besides, in tech, knowing how to find the right answers is often more valuable than memorizing them all!
+            Welcome to my tech toolkit! While my expertise lies in Data Engineering, I've explored each of these technologies at some point & have thoroughly enjoyed creating with them. Sure, I won't claim to be a guru in everything (let's keep it real!), but <span className="text-[#6bab8a] font-medium">here's my secret sauce</span>: Once you truly get what a tool is meant for and why you'd use it, figuring out how is just a matter of resourceful problem-solving! Besides, in tech, knowing how to find the right answers is often more valuable than memorizing them all!
           </motion.p>
         </motion.div>
 
@@ -132,11 +132,11 @@ const Skills = () => {
                   className="group"
                 >
                   <motion.div
-                    className="bg-[#F0F4F8] bg-opacity-5 backdrop-blur-sm rounded-xl p-4 h-full flex items-center justify-center text-center transition-all duration-300 hover:bg-opacity-10 border border-white/5 hover:border-cyan-400/30 shadow-lg hover:shadow-cyan-400/5 relative overflow-hidden"
+                    className="bg-[#F0F4F8] bg-opacity-5 backdrop-blur-sm rounded-xl p-4 h-full flex items-center justify-center text-center transition-all duration-300 hover:bg-opacity-10 border border-white/5 hover:border-[#6bab8a]/30 shadow-lg hover:shadow-[#6bab8a]/5 relative overflow-hidden"
                     animate={{
                       boxShadow: hoveredSkill === skill 
-                        ? "0 0 20px rgba(34,211,238,0.2)" 
-                        : "0 0 0 rgba(34,211,238,0)"
+                        ? "0 0 20px rgba(107,171,138,0.2)" 
+                        : "0 0 0 rgba(107,171,138,0)"
                     }}
                   >
                     {/* Animated background gradient */}
@@ -144,8 +144,8 @@ const Skills = () => {
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       animate={{
                         background: [
-                          "linear-gradient(45deg, transparent 0%, rgba(34,211,238,0.1) 50%, transparent 100%)",
-                          "linear-gradient(45deg, transparent 100%, rgba(34,211,238,0.1) 50%, transparent 0%)",
+                          "linear-gradient(45deg, transparent 0%, rgba(107,171,138,0.1) 50%, transparent 100%)",
+                          "linear-gradient(45deg, transparent 100%, rgba(107,171,138,0.1) 50%, transparent 0%)",
                         ]
                       }}
                       transition={{
@@ -155,7 +155,7 @@ const Skills = () => {
                       }}
                     />
                     
-                    <span className="text-gray-300 group-hover:text-cyan-400 transition-colors duration-300 font-medium relative z-10">
+                    <span className="text-gray-300 group-hover:text-[#6bab8a] transition-colors duration-300 font-medium relative z-10">
                       {skill}
                     </span>
                   </motion.div>
@@ -188,7 +188,7 @@ const Skills = () => {
                   repeat: Infinity,
                   repeatType: "reverse"
                 }}
-                className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10"
+                className="absolute inset-0 bg-gradient-to-r from-[#6bab8a]/10 to-purple-500/10"
               />
               <motion.div
                 className="relative z-10"
@@ -203,7 +203,7 @@ const Skills = () => {
                   ⚡
                 </motion.span>
                 <motion.div
-                  className="text-3xl font-bold text-cyan-400 mb-2"
+                  className="text-3xl font-bold text-[#6bab8a] mb-2"
                   whileHover={{ scale: 1.1 }}
                 >
                   7+
@@ -223,7 +223,7 @@ const Skills = () => {
               className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm rounded-xl p-6 border border-white/10"
             >
               <motion.h3
-                className="text-lg font-bold text-cyan-400 mb-4 text-center"
+                className="text-lg font-bold text-[#6bab8a] mb-4 text-center"
                 whileHover={{ scale: 1.05 }}
               >
                 Certifications
@@ -231,7 +231,7 @@ const Skills = () => {
               <div className="flex flex-col items-center gap-8">
                 {/* AWS Data Engineer Associate Badge */}
                 <motion.a
-                  href="https://www.credly.com/badges/0e2e7e2d-aws-data-engineer-associate-badge-url" 
+                  href="https://www.credly.com/badges/27a2c161-ed0e-4161-9cbb-9e98df833bf5/public_url" 
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
@@ -265,7 +265,7 @@ const Skills = () => {
                 </motion.a>
                 {/* AWS Cloud Practitioner Badge */}
                 <motion.a
-                  href="https://www.credly.com/badges/b430e396-bc09-4857-82a5-920be64ccc0b/public_url"
+                  href="https://www.credly.com/badges/1acc8ece-4ebd-4a9e-a624-1c6a5707649f/public_url"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
