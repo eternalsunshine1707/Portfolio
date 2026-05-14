@@ -86,7 +86,7 @@ const Education = () => {
   const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="education" className="min-h-screen bg-dark-950 py-24 relative overflow-hidden" ref={containerRef}>
+    <section id="education" className="min-h-screen py-24 relative overflow-hidden" ref={containerRef}>
       <div className="container mx-auto px-4 lg:px-8">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

@@ -86,7 +86,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="min-h-screen bg-dark-950 py-24 relative overflow-hidden"
+      className="min-h-screen py-24 relative overflow-hidden"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none min-h-full z-0">
         <ContactNetworkCanvas />

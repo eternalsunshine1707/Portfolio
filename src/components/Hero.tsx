@@ -32,7 +32,7 @@ const Hero = () => {
   }, [roles.length]);
 
   return (
-    <section className="min-h-screen pt-20 bg-dark-950 overflow-hidden">
+    <section className="min-h-screen pt-20 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center justify-between min-h-[calc(100vh-5rem)] gap-12">
           {/* Left Content */}
@@ -273,21 +273,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.2 }}
-          transition={{ duration: 1 }}
-          className="absolute w-[500px] h-[500px] -top-48 -right-24 bg-[#6bab8a]/20 rounded-full blur-[120px]"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.15 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="absolute w-[400px] h-[400px] top-1/3 -left-24 bg-purple-500/20 rounded-full blur-[100px]"
-        />
-      </div>
     </section>
   );
 };

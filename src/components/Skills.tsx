@@ -52,7 +52,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="min-h-screen bg-dark-950 py-24 relative overflow-hidden" ref={ref}>
+    <section id="skills" className="min-h-screen py-24 relative overflow-hidden" ref={ref}>
       {/* Animated Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
