@@ -141,7 +141,7 @@ const Header = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-6 mr-12">
             {navItems.map((item, index) => (
               <motion.div
                 key={item.name}
@@ -171,7 +171,7 @@ const Header = () => {
                   >
                     {item.icon}
                   </motion.span>
-                  <span className="text-sm font-medium relative">
+                  <span className="text-base font-medium relative">
                     {item.name.split('').map((letter, i) => (
                       <motion.span
                         key={i}
@@ -263,7 +263,7 @@ const Header = () => {
                     } transition-colors`}
                   >
                     {item.icon}
-                    <span className="text-sm font-medium">{item.name}</span>
+                    <span className="text-base font-medium">{item.name}</span>
                   </motion.a>
                 ))}
               </div>

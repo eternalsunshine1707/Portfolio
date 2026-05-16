@@ -149,7 +149,7 @@ const Projects = () => {
                     transition={{ delay: 0.4 }}
                     whileHover={{ scale: 1.02 }}
                   >
-                    <p className="text-gray-300 text-[15px] leading-relaxed">
+                    <p className="text-gray-300 text-lg leading-relaxed">
                       {project.description}
                     </p>
                   </motion.div>

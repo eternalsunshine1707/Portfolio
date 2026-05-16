@@ -114,7 +114,7 @@ const Contact = () => {
               <span className="w-8 h-8 text-[#6bab8a]">✦</span>
             </div>
             <div className="flex flex-col items-center gap-4">
-              <p className="text-gray-400 max-w-2xl">
+              <p className="text-gray-400 text-lg max-w-2xl">
                 I'm currently on the lookout for full-time opportunities in Data Engineering and Data Analytics, and I'm
                 excited to connect! Whether you have a question, a potential collaboration, or just want to say hi,
                 don't hesitate to reach out. I'll do my best to get back to you quickly - We might

@@ -150,7 +150,7 @@ const Education = () => {
                 </div>
 
                 {/* Content Card */}
-                <div className="ml-16 lg:ml-12 lg:w-2/3">
+                <div className="ml-16 lg:ml-6 lg:w-[55%]">
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="bg-white/5 rounded-xl p-8 backdrop-blur-sm border border-white/10 shadow-xl"
@@ -221,7 +221,7 @@ const Education = () => {
                       >
                         <ul className="mt-4 space-y-3">
                           {entry.courses.map((course, idx) => (
-                            <li key={idx} className="text-gray-300 text-[15px]">
+                            <li key={idx} className="text-gray-300 text-lg">
                               <div className="flex items-start">
                                 <span className="w-1.5 h-1.5 rounded-full bg-[#6bab8a] mt-1.5 mr-2 flex-shrink-0" />
                                 <div>

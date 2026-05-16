@@ -11,7 +11,7 @@ const GlobalBackground = () => {
             linear-gradient(rgba(107,171,138,0.06) 1px, transparent 1px),
             linear-gradient(90deg, rgba(107,171,138,0.06) 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px',
+          backgroundSize: '35px 35px',
           animation: 'gridScroll 18s linear infinite',
           transformOrigin: 'center top',
           transform: 'perspective(600px) rotateX(12deg)',
