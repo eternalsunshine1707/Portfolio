@@ -59,7 +59,7 @@ const Header = () => {
 
   return (
     <header className="fixed w-full top-0 z-50 bg-dark-950/80 backdrop-blur-md border-b border-white/10">
-      <div className="container mx-auto px-6">
+      <div className="w-full px-8 xl:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Animated Logo */}
           <motion.div 

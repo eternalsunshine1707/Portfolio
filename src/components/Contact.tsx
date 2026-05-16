@@ -92,7 +92,7 @@ const Contact = () => {
         <ContactNetworkCanvas />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="w-full px-8 xl:px-12 relative z-10">
         <div className="max-w-3xl mx-auto">
           <div className="flex justify-center mb-10">
             <div

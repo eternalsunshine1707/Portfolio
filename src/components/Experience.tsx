@@ -122,7 +122,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="min-h-screen py-24 relative overflow-hidden" ref={containerRef}>
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="w-full px-8 xl:px-12">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
@@ -245,7 +245,7 @@ const Experience = () => {
                       >
                         <ul className="mt-4 space-y-2">
                           {entry.responsibilities.map((responsibility, idx) => (
-                            <li key={idx} className="text-gray-300 text-sm flex items-start">
+                            <li key={idx} className="text-gray-300 text-[15px] flex items-start">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#6bab8a] mt-1.5 mr-2 flex-shrink-0" />
                               {responsibility}
                             </li>

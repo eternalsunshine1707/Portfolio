@@ -33,19 +33,19 @@ const Hero = () => {
 
   return (
     <section className="min-h-screen pt-20 overflow-hidden">
-      <div className="container mx-auto px-6">
+      <div className="w-full px-8 xl:px-12">
         <div className="flex flex-col lg:flex-row items-center justify-between min-h-[calc(100vh-5rem)] gap-12">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="w-full lg:w-[60%]"
+            className="w-full lg:flex-1"
           >
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl lg:text-6xl font-bold text-white leading-tight mb-8"
+              className="text-5xl lg:text-7xl font-bold text-white leading-tight mb-8"
             >
               Hi! I'm{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6bab8a] to-[#6bab8a]">
@@ -57,7 +57,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="space-y-6 text-base text-gray-300 leading-relaxed mb-12 max-w-3xl"
+              className="space-y-6 text-lg text-gray-300 leading-relaxed mb-12 text-justify"
             >
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
                 I enjoy creating things that live on the Internet. With 7+ years of experience across Data Engineering and Analytics, I've designed pipelines that move millions of records, built dashboards that help teams make faster decisions, and automated workflows that save hours every week. Whether it's architecting an ETL pipeline from scratch or digging into messy data to find the story it's trying to tell - I'm equally at home in both worlds. Currently, I'm actively exploring full-time roles in Data Engineering and Data Analytics.
@@ -151,7 +151,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="w-full lg:w-[40%] perspective lg:pl-12"
+            className="w-full lg:w-[420px] lg:flex-shrink-0 perspective"
           >
             <motion.div
               whileHover={{ rotateY: 10, scale: 1.02 }}

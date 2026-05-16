@@ -70,7 +70,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="min-h-screen py-24 relative overflow-hidden">
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="w-full px-8 xl:px-12">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ const Projects = () => {
         </motion.h1>
 
         {/* Projects List */}
-        <div className="max-w-5xl mx-auto space-y-24">
+        <div className="max-w-6xl mx-auto space-y-24">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -149,7 +149,7 @@ const Projects = () => {
                     transition={{ delay: 0.4 }}
                     whileHover={{ scale: 1.02 }}
                   >
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <p className="text-gray-300 text-[15px] leading-relaxed">
                       {project.description}
                     </p>
                   </motion.div>

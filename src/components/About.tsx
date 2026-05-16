@@ -39,7 +39,7 @@ const About = () => {
 
   return (
     <section id="about-me" className="min-h-screen py-24 overflow-hidden" ref={containerRef}>
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="w-full px-8 xl:px-12">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
@@ -106,7 +106,7 @@ const About = () => {
           </motion.div>
 
           <div className="lg:w-[70%] lg:pl-4" ref={ref}>
-            <div className="w-full max-w-4xl">
+            <div className="w-full">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
@@ -120,7 +120,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-[#6bab8a] text-sm font-medium mb-6"
+                className="text-[#6bab8a] text-base font-medium mb-6"
               >
                 I'm graduate student pursuing Master's in Computer Science at The George Washington University, and I'm actively exploring new opportunities as a Data Engineer. This website was made to showcase everything I can do and plan to do. Don't judge my writing based on this section, though - this is by far my shoddiest work yet!
               </motion.h3>
@@ -130,7 +130,7 @@ const About = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="text-white text-sm leading-relaxed text-justify"
+                  className="text-white text-base leading-relaxed text-justify"
                 >
                   I got into data engineering because I'm what you might call a <span className="highlight">pseudo-perfectionist</span> (is that even a thing!?). I can't stand messy data, clunky processes, or things that just don't "look right." If something doesn't work smoothly or doesn't look great, it bugs me to no end. It's like an itch I have to scratch. So, naturally, I found myself on this path where I get to make things that are not just functional but downright fabulous. <span className="highlight">Crafting pipelines</span>, <span className="highlight">optimizing data flows</span>, and ensuring everything "fits perfectly" has become my way of bringing order to chaos, and that's the energy I bring to every project - getting it to look and work just right (and maybe showing off a little).
                 </motion.p>
@@ -139,7 +139,7 @@ const About = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="text-white text-sm leading-relaxed text-justify"
+                  className="text-white text-base leading-relaxed text-justify"
                 >
                   My love for development, though, started way before this pseudo-perfectionist epiphany. I mean, think about it - "<span className="text-[#6bab8a]">int i = 10;</span>" magically makes a whole integer? Wow! Watching lines of code morph into apps like Facebook or Amazon? Pure magic. That's when I knew: I wanted to be part of this magic, creating things people actually use and love.
                 </motion.p>
@@ -148,7 +148,7 @@ const About = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
-                  className="text-white text-sm leading-relaxed text-justify"
+                  className="text-white text-base leading-relaxed text-justify"
                 >
                   I created this website to showcase my work, my passion for problem-solving, and, above all, my love for building solutions that matter. Through this, I hope to make it easier for you to connect with me. If you like what you see, head over to the contact section and drop me a message - I'd love to hear from you!
                 </motion.p>
