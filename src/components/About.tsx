@@ -10,7 +10,7 @@ const SLIDES = [
   { src: './Kutty5.jpeg', alt: 'WTF Kutty' },
   { src: './Kutty6.jpeg', alt: 'WTF Kutty' },
   { src: './Kutty7.JPG', alt: 'WTF Kutty' },
-
+]
 const About = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
