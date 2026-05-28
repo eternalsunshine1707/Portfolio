@@ -8,6 +8,9 @@ const SLIDES = [
   { src: './Kutty3.jpeg', alt: 'Delusional Kutty' },
   { src: './Kutty4.jpeg', alt: 'Dramebaaz Kutty' },
   { src: './Kutty5.jpeg', alt: 'WTF Kutty' },
+  { src: './Kutty6.jpeg', alt: 'WTF Kutty' },
+  { src: './Kutty7.JPG', alt: 'WTF Kutty' },
+  { src: './Kutty8.PNG', alt: 'WTF Kutty' },
 ];
 
 const About = () => {
