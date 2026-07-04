@@ -67,7 +67,7 @@ const Skills = () => {
             repeatType: "reverse",
             ease: "linear"
           }}
-          className="absolute w-[800px] h-[800px] -top-96 -right-96 bg-[#6bab8a]/10 rounded-full blur-[120px]"
+          className="absolute w-[800px] h-[800px] -top-96 -right-96 bg-[#3a2f2f]/10 rounded-full blur-[120px]"
         />
         <motion.div
           animate={{
@@ -106,7 +106,7 @@ const Skills = () => {
             animate={inView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Welcome to my tech toolkit! While my expertise lies in Data Engineering, I've explored each of these technologies at some point & have thoroughly enjoyed creating with them. Sure, I won't claim to be a guru in everything (let's keep it real!), but <span className="text-[#6bab8a] font-medium">here's my secret sauce</span>: Once you truly get what a tool is meant for and why you'd use it, figuring out how is just a matter of resourceful problem-solving! Besides, in tech, knowing how to find the right answers is often more valuable than memorizing them all!
+            Welcome to my tech toolkit! While my expertise lies in Data Engineering, I've explored each of these technologies at some point & have thoroughly enjoyed creating with them. Sure, I won't claim to be a guru in everything (let's keep it real!), but <span className="text-[#3a2f2f] font-medium">here's my secret sauce</span>: Once you truly get what a tool is meant for and why you'd use it, figuring out how is just a matter of resourceful problem-solving! Besides, in tech, knowing how to find the right answers is often more valuable than memorizing them all!
           </motion.p>
         </motion.div>
 
@@ -132,7 +132,7 @@ const Skills = () => {
                   className="group"
                 >
                   <motion.div
-                    className="bg-[#F0F4F8] bg-opacity-5 backdrop-blur-sm rounded-xl p-4 h-full flex items-center justify-center text-center transition-all duration-300 hover:bg-opacity-10 border border-white/5 hover:border-[#6bab8a]/30 shadow-lg hover:shadow-[#6bab8a]/5 relative overflow-hidden"
+                    className="bg-[#F0F4F8] bg-opacity-5 backdrop-blur-sm rounded-xl p-4 h-full flex items-center justify-center text-center transition-all duration-300 hover:bg-opacity-10 border border-white/5 hover:border-[#3a2f2f]/30 shadow-lg hover:shadow-[#3a2f2f]/5 relative overflow-hidden"
                     animate={{
                       boxShadow: hoveredSkill === skill 
                         ? "0 0 20px rgba(107,171,138,0.2)" 
@@ -155,7 +155,7 @@ const Skills = () => {
                       }}
                     />
                     
-                    <span className="text-gray-300 group-hover:text-[#6bab8a] transition-colors duration-300 font-medium relative z-10">
+                    <span className="text-gray-300 group-hover:text-[#3a2f2f] transition-colors duration-300 font-medium relative z-10">
                       {skill}
                     </span>
                   </motion.div>
@@ -188,7 +188,7 @@ const Skills = () => {
                   repeat: Infinity,
                   repeatType: "reverse"
                 }}
-                className="absolute inset-0 bg-gradient-to-r from-[#6bab8a]/10 to-purple-500/10"
+                className="absolute inset-0 bg-gradient-to-r from-[#3a2f2f]/10 to-purple-500/10"
               />
               <motion.div
                 className="relative z-10"
@@ -203,7 +203,7 @@ const Skills = () => {
                   ⚡
                 </motion.span>
                 <motion.div
-                  className="text-3xl font-bold text-[#6bab8a] mb-2"
+                  className="text-3xl font-bold text-[#3a2f2f] mb-2"
                   whileHover={{ scale: 1.1 }}
                 >
                   7+
@@ -223,7 +223,7 @@ const Skills = () => {
               className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm rounded-xl p-6 border border-white/10"
             >
               <motion.h3
-                className="text-lg font-bold text-[#6bab8a] mb-4 text-center"
+                className="text-lg font-bold text-[#3a2f2f] mb-4 text-center"
                 whileHover={{ scale: 1.05 }}
               >
                 Certifications

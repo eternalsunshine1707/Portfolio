@@ -1,6 +1,74 @@
-import { motion, useAnimationControls } from 'framer-motion';
-import { Github } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { motion, useAnimationControls, useInView } from 'framer-motion';
+import { Github, ArrowRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+
+interface Metric {
+  label: string;
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+}
+
+const METRICS: Metric[] = [
+  { label: 'Records Processed Daily', value: 1, suffix: 'M+' },
+  { label: 'Pipeline Runtime Reduction', value: 35, suffix: '%' },
+  { label: 'Saved Monthly', value: 7.5, prefix: '$', suffix: 'K', decimals: 1 },
+  { label: 'Rows Optimized', value: 50, suffix: 'M+' },
+  { label: 'Data Reliability', value: 99, suffix: '%+' },
+  { label: 'Production Pipelines Deployed', value: 10, suffix: '+' },
+];
+
+const CountUpMetric = ({
+  metric,
+  isSelected,
+  isAnyoneSelected,
+  onSelect,
+}: {
+  metric: Metric;
+  isSelected: boolean;
+  isAnyoneSelected: boolean;
+  onSelect: () => void;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: false });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView && !isSelected) return;
+    let raf: number;
+    const start = performance.now();
+    const duration = 1400;
+    const animate = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      setDisplay(metric.value * progress);
+      if (progress < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView, isSelected]);
+
+  const decimals = metric.decimals ?? 0;
+
+  return (
+    <motion.div
+      ref={ref}
+      onClick={onSelect}
+      className="cursor-pointer select-none transition-opacity duration-300"
+      style={{ opacity: isAnyoneSelected && !isSelected ? 0.35 : 1 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.97 }}
+    >
+      <div className="text-xl lg:text-2xl font-bold text-[#3a2f2f] whitespace-nowrap">
+        {metric.prefix}
+        {display.toFixed(decimals)}
+        {metric.suffix}
+      </div>
+      <div className="text-[11px] text-gray-400 mt-1 whitespace-nowrap">{metric.label}</div>
+    </motion.div>
+  );
+};
 
 interface Portfolio {
   [key: string]: string | boolean;
@@ -21,9 +89,55 @@ const sravani: Portfolio = {
 
 const LINE_STAGGER = 0.13; // seconds between each terminal line
 
+const ViewWorkButton = () => {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const handleMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--my', `${e.clientY - rect.top}px`);
+  };
+  return (
+    <motion.a
+      ref={ref}
+      href="#projects"
+      onMouseMove={handleMove}
+      whileHover={{ y: -3 }}
+      whileTap={{ scale: 0.96 }}
+      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white transition-colors hover:text-[#3a2f2f]"
+    >
+      {/* Traveling light along the border, like the shivypatel.com CTA */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-full"
+        style={{
+          padding: '1.5px',
+          background: 'conic-gradient(from 0deg, transparent 0%, transparent 90%, #3a2f2f 96%, #fff 98%, #3a2f2f 100%)',
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+          animation: 'spinBorder 2.4s linear infinite',
+        }}
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-25"
+        style={{
+          background: 'radial-gradient(140px circle at var(--mx, 50%) var(--my, 50%), #3a2f2f, transparent 60%)',
+        }}
+      />
+      <span className="relative">View my work</span>
+      <ArrowRight className="relative w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+    </motion.a>
+  );
+};
+
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [terminalVisible, setTerminalVisible] = useState(false);
+  const [imageFlipped, setImageFlipped] = useState(false);
+  const [selectedMetric, setSelectedMetric] = useState<number | null>(null);
   const roles = Object.keys(sravani).filter(key => key !== 'loading');
 
   // Controls for the right-side box — starts hidden, triggered after left finishes
@@ -74,7 +188,7 @@ const Hero = () => {
               className="text-4xl lg:text-6xl font-bold text-white leading-tight mb-8"
             >
               Hi! I'm{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6bab8a] to-[#6bab8a]">
+              <span className="text-[#3a2f2f]">
                 Sravani B
               </span>
             </motion.h1>
@@ -163,120 +277,73 @@ const Hero = () => {
                   </motion.span>
                 </motion.a>
               </div>
+
+              <span className="h-6 w-px bg-white/20 hidden sm:block" aria-hidden />
+
+              <ViewWorkButton />
             </motion.div>
+
+            {/* ── IMPACT METRICS ── */}
+            <div className="flex flex-nowrap items-start gap-6 lg:gap-8 mt-14 overflow-x-auto pb-2">
+              {METRICS.map((metric, index) => (
+                <CountUpMetric
+                  key={metric.label}
+                  metric={metric}
+                  isSelected={selectedMetric === index}
+                  isAnyoneSelected={selectedMetric !== null}
+                  onSelect={() => setSelectedMetric(prev => (prev === index ? null : index))}
+                />
+              ))}
+            </div>
           </motion.div>
 
-          {/* ── RIGHT — waits for left, then drops + bounces, then lines type in ── */}
+          {/* ── RIGHT — waits for left, then drops + bounces in ── */}
           <motion.div
             initial={{ opacity: 0, y: -220 }}
             animate={rightBoxControls}
             className="w-full lg:w-[40%] perspective lg:pl-12"
             style={{ willChange: 'transform, opacity' }}
           >
-            <motion.div
-              whileHover={{ rotateY: 10, scale: 1.02 }}
-              className="w-full bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 relative overflow-hidden transform transition-transform duration-300"
-            >
-              {/* Animated Background Grid */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_0%,transparent_49%,rgba(107,171,138,0.1)_50%,transparent_51%,transparent_100%)] bg-[length:40px_40px] animate-[grid_2s_linear_infinite]" />
+            <div className="relative w-full aspect-[4/5] max-w-md mx-auto">
+              <motion.div
+                onClick={() => setImageFlipped((f) => !f)}
+                whileHover={{ scale: 1.02 }}
+                className="group relative w-full h-full rounded-xl overflow-hidden border border-white/10 cursor-pointer bg-gradient-to-br from-white/10 to-white/0"
+              >
+                <div
+                  className={`absolute inset-0 flex items-center justify-center text-lg font-semibold text-white/70 bg-gradient-to-br ${
+                    imageFlipped ? 'from-[#2a2a3a] to-[#161622]' : 'from-[#3a2f2f] to-[#1c1616]'
+                  } transition-all duration-500`}
+                >
+                  {imageFlipped ? 'Photo 2 (placeholder)' : 'Photo 1 (placeholder)'}
+                </div>
 
-              {/* Glowing Line Effect */}
-              <div className="absolute h-px w-full top-0 left-0 bg-gradient-to-r from-transparent via-[#6bab8a] to-transparent animate-shimmer" />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="px-5 py-2 rounded-full border border-[#3a2f2f]/60 text-[#3a2f2f] text-sm font-semibold tracking-wide">
+                    Click me
+                  </span>
+                </div>
+              </motion.div>
 
-              <div className="font-mono text-base relative">
-                {/* PHASE 2: lines only mount after box has fully landed */}
-                {terminalVisible && (
-                  <>
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0, duration: 0.2 }}
-                      className="text-emerald-400"
-                    >
-                      // Portfolio Interface
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: LINE_STAGGER, duration: 0.2 }}
-                    >
-                      <span className="text-purple-400">const</span>{' '}
-                      <span className="text-blue-400">sravani</span>
-                      <span className="text-white">:</span>{' '}
-                      <span className="text-yellow-400">Array</span>
-                      <span className="text-[#6bab8a]">&lt;</span>
-                      <span className="text-yellow-400">Portfolio</span>
-                      <span className="text-[#6bab8a]">&gt;</span>{' '}
-                      <span className="text-white">=</span>{' '}
-                      <span className="text-white">[</span>
-                    </motion.div>
-
-                    <div className="space-y-2 pl-4">
-                      {roles.map((role, index) => (
-                        <motion.div
-                          key={role}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: LINE_STAGGER * (index + 2), duration: 0.2 }}
-                          className="flex items-center"
-                        >
-                          <span className="text-orange-400">'</span>
-                          <span className={`${index === currentIndex ? 'text-white' : 'text-gray-400'}`}>
-                            {role}
-                            {index === currentIndex && (
-                              <motion.span
-                                initial={{ scaleX: 1 }}
-                                animate={{ scaleX: 0 }}
-                                transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
-                                className="absolute -right-4 top-1/2 -translate-y-1/2 w-2 h-4 bg-[#6bab8a]"
-                              />
-                            )}
-                          </span>
-                          <span className="text-orange-400">'</span>
-                          <span className="text-white">,</span>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: LINE_STAGGER * (roles.length + 2), duration: 0.2 }}
-                      className="pl-4 mt-2"
-                    >
-                      <span className="text-blue-400">loading</span>
-                      <span className="text-white">:</span>{' '}
-                      <span className="text-orange-400">true</span>{' '}
-                      <span className="text-emerald-400">// Forever Evolving...</span>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: LINE_STAGGER * (roles.length + 3), duration: 0.2 }}
-                      className="text-white"
-                    >
-                      ];
-                    </motion.div>
-                  </>
-                )}
-              </div>
-
-              {/* Matrix-like Rain Effect */}
-              <div className="absolute inset-0 pointer-events-none">
-                {[...Array(10)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={{ y: ['0%', '100%'], opacity: [0, 1, 0] }}
-                    transition={{ duration: 2, delay: i * 0.2, repeat: Infinity, repeatType: 'loop' }}
-                    className="absolute w-px h-20 bg-gradient-to-b from-transparent via-[#6bab8a] to-transparent"
-                    style={{ left: `${i * 10}%` }}
-                  />
-                ))}
-              </div>
-            </motion.div>
+              {/* Marching-ants light dashes running just outside this box's edge — no separate box */}
+              <svg className="absolute -inset-3 pointer-events-none" viewBox="0 0 100 125">
+                <rect
+                  x="1"
+                  y="1"
+                  width="98"
+                  height="123"
+                  rx="9"
+                  fill="none"
+                  stroke="#3a2f2f"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeDasharray="22 17 9 19"
+                  vectorEffect="non-scaling-stroke"
+                  style={{ animation: 'marchingAnts 6s linear infinite' }}
+                />
+              </svg>
+            </div>
           </motion.div>
 
         </div>

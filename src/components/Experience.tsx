@@ -136,7 +136,7 @@ const Experience = () => {
           {/* Timeline Line */}
           <div className="absolute left-8 lg:left-1/3 transform lg:-translate-x-px h-full w-px bg-white/10">
             <motion.div
-              className="absolute top-0 left-0 w-full bg-[#6bab8a]"
+              className="absolute top-0 left-0 w-full bg-[#3a2f2f]"
               style={{ height: progressHeight }}
             />
           </div>
@@ -171,14 +171,14 @@ const Experience = () => {
                     </div>
                   </motion.div>
                   {/* Connecting Line */}
-                  <div className="absolute right-0 top-1/2 w-16 h-px bg-gradient-to-r from-[#6bab8a]/20 to-[#6bab8a]" />
+                  <div className="absolute right-0 top-1/2 w-16 h-px bg-gradient-to-r from-[#3a2f2f]/20 to-[#3a2f2f]" />
                 </div>
 
                 {/* Timeline Point */}
                 <div className="absolute left-8 lg:left-1/3 transform lg:-translate-x-1/2 w-4 h-4">
-                  <div className="w-4 h-4 rounded-full bg-dark-950 border-2 border-[#6bab8a] relative">
+                  <div className="w-4 h-4 rounded-full bg-dark-950 border-2 border-[#3a2f2f] relative">
                     {entry.isCurrentPosition && (
-                      <span className="absolute inset-0 rounded-full animate-ping bg-[#6bab8a] opacity-75" />
+                      <span className="absolute inset-0 rounded-full animate-ping bg-[#3a2f2f] opacity-75" />
                     )}
                   </div>
                 </div>
@@ -208,7 +208,7 @@ const Experience = () => {
                     <h3 className="text-2xl font-bold text-white mb-2">
                       {entry.company}
                     </h3>
-                    <p className="text-[#6bab8a] text-sm mb-2">
+                    <p className="text-[#3a2f2f] text-sm mb-2">
                       {entry.duration}
                     </p>
                     <p className="text-white font-medium mb-2">
@@ -223,7 +223,7 @@ const Experience = () => {
                       <button
                         type="button"
                         onClick={() => toggleDetails(entry.id)}
-                        className="flex items-center justify-between w-full text-white hover:text-[#6bab8a] transition-colors"
+                        className="flex items-center justify-between w-full text-white hover:text-[#3a2f2f] transition-colors"
                       >
                         <span className="font-medium">Responsibilities</span>
                         <ChevronDown
@@ -246,7 +246,7 @@ const Experience = () => {
                         <ul className="mt-4 space-y-2">
                           {entry.responsibilities.map((responsibility, idx) => (
                             <li key={idx} className="text-gray-300 text-lg flex items-start">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#6bab8a] mt-1.5 mr-2 flex-shrink-0" />
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#3a2f2f] mt-1.5 mr-2 flex-shrink-0" />
                               {responsibility}
                             </li>
                           ))}

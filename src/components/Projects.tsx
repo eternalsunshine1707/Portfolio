@@ -111,7 +111,7 @@ const Projects = () => {
                     className="w-full h-full object-cover"
                   />
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#6bab8a]/20 to-purple-500/20 opacity-0 transition-opacity duration-300"
+                    className="absolute inset-0 bg-gradient-to-r from-[#3a2f2f]/20 to-purple-500/20 opacity-0 transition-opacity duration-300"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: hoveredId === project.id ? 0.2 : 0 }}
                   />
@@ -127,7 +127,7 @@ const Projects = () => {
                   className="relative"
                 >
                   <motion.span 
-                    className="text-[#6bab8a] text-sm font-medium mb-2 block"
+                    className="text-[#3a2f2f] text-sm font-medium mb-2 block"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
@@ -135,7 +135,7 @@ const Projects = () => {
                     {project.category}
                   </motion.span>
                   <motion.h3 
-                    className="text-2xl font-bold text-white mb-4 group-hover:text-[#6bab8a] transition-colors"
+                    className="text-2xl font-bold text-white mb-4 group-hover:text-[#3a2f2f] transition-colors"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
@@ -187,7 +187,7 @@ const Projects = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white hover:text-[#6bab8a] transition-colors flex items-center gap-2 group/link"
+                        className="text-white hover:text-[#3a2f2f] transition-colors flex items-center gap-2 group/link"
                         whileHover={{ x: 5 }}
                       >
                         <Github size={20} />
@@ -200,7 +200,7 @@ const Projects = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white hover:text-[#6bab8a] transition-colors flex items-center gap-2 group/link"
+                        className="text-white hover:text-[#3a2f2f] transition-colors flex items-center gap-2 group/link"
                         whileHover={{ x: 5 }}
                       >
                         <ExternalLink size={20} />

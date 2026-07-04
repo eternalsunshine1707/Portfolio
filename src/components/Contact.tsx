@@ -10,28 +10,28 @@ const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
 
 const contactMethods = [
   {
-    icon: <Mail className="w-6 h-6 text-[#6bab8a]" />,
+    icon: <Mail className="w-6 h-6 text-[#3a2f2f]" />,
     label: 'Email',
     value: 'sravanistar99@gmail.com',
     href: 'mailto:sravanistar99@gmail.com',
     external: false,
   },
   {
-    icon: <Linkedin className="w-6 h-6 text-[#6bab8a]" />,
+    icon: <Linkedin className="w-6 h-6 text-[#3a2f2f]" />,
     label: 'LinkedIn',
     value: 'linkedin.com/in/sravaniofficial',
     href: 'https://www.linkedin.com/in/sravaniofficial/',
     external: true,
   },
   {
-    icon: <Github className="w-6 h-6 text-[#6bab8a]" />,
+    icon: <Github className="w-6 h-6 text-[#3a2f2f]" />,
     label: 'GitHub',
     value: 'github.com/eternalsunshine1707',
     href: 'https://github.com/eternalsunshine1707',
     external: true,
   },
   {
-    icon: <MapPin className="w-6 h-6 text-[#6bab8a]" />,
+    icon: <MapPin className="w-6 h-6 text-[#3a2f2f]" />,
     label: 'Location',
     value: 'Virginia, USA',
     href: null,
@@ -40,7 +40,7 @@ const contactMethods = [
 ] as const;
 
 const cardClass =
-  'flex-1 min-w-[200px] max-w-xs flex flex-col items-center gap-2 bg-gradient-to-b from-[#6bab8a]/30 to-purple-900/30 border border-white/10 rounded-xl px-6 py-6 shadow-none transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-[#6bab8a] hover:shadow-[0_0_0_1px_rgba(107,171,138,0.45),0_20px_48px_-12px_rgba(107,171,138,0.28)]';
+  'flex-1 min-w-[200px] max-w-xs flex flex-col items-center gap-2 bg-gradient-to-b from-[#3a2f2f]/30 to-purple-900/30 border border-white/10 rounded-xl px-6 py-6 shadow-none transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-[#3a2f2f] hover:shadow-[0_0_0_1px_rgba(107,171,138,0.45),0_20px_48px_-12px_rgba(107,171,138,0.28)]';
 
 const Contact = () => {
   const [fullName, setFullName] = useState('');
@@ -81,7 +81,7 @@ const Contact = () => {
   };
 
   const inputClass =
-    'w-full bg-black/40 border border-white/15 rounded-lg px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-[#6bab8a] focus:ring-1 focus:ring-[#6bab8a]/40 transition-colors duration-300';
+    'w-full bg-black/40 border border-white/15 rounded-lg px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-[#3a2f2f] focus:ring-1 focus:ring-[#3a2f2f]/40 transition-colors duration-300';
 
   return (
     <section
@@ -109,9 +109,9 @@ const Contact = () => {
 
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="w-8 h-8 text-[#6bab8a]">✦</span>
+              <span className="w-8 h-8 text-[#3a2f2f]">✦</span>
               <h1 className="text-4xl lg:text-5xl font-bold text-white">GET IN TOUCH</h1>
-              <span className="w-8 h-8 text-[#6bab8a]">✦</span>
+              <span className="w-8 h-8 text-[#3a2f2f]">✦</span>
             </div>
             <div className="flex flex-col items-center gap-4">
               <p className="text-gray-400 text-lg max-w-2xl">
@@ -129,7 +129,7 @@ const Contact = () => {
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label htmlFor="contact-full-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#6bab8a]/90">
+                <label htmlFor="contact-full-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#3a2f2f]/90">
                   Full Name
                 </label>
                 <input
@@ -148,7 +148,7 @@ const Contact = () => {
                 />
               </div>
               <div>
-                <label htmlFor="contact-email" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#6bab8a]/90">
+                <label htmlFor="contact-email" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#3a2f2f]/90">
                   Email Address
                 </label>
                 <input
@@ -168,7 +168,7 @@ const Contact = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="contact-subject" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#6bab8a]/90">
+              <label htmlFor="contact-subject" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#3a2f2f]/90">
                 Subject
               </label>
               <input
@@ -186,7 +186,7 @@ const Contact = () => {
               />
             </div>
             <div>
-              <label htmlFor="contact-message" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#6bab8a]/90">
+              <label htmlFor="contact-message" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#3a2f2f]/90">
                 Message
               </label>
               <textarea
@@ -225,7 +225,7 @@ const Contact = () => {
               type="submit"
               disabled={submitState === 'loading'}
               aria-busy={submitState === 'loading'}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#6bab8a] py-3.5 text-base font-semibold text-white shadow-lg shadow-[#6bab8a]/20 transition-all duration-300 ease-in-out hover:bg-[#6bab8a] hover:shadow-[0_0_24px_rgba(107,171,138,0.35)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:min-w-[200px] sm:self-start"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#3a2f2f] py-3.5 text-base font-semibold text-white shadow-lg shadow-[#3a2f2f]/20 transition-all duration-300 ease-in-out hover:bg-[#3a2f2f] hover:shadow-[0_0_24px_rgba(107,171,138,0.35)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:min-w-[200px] sm:self-start"
             >
               {submitState === 'loading' ? (
                 <>
@@ -246,13 +246,13 @@ const Contact = () => {
               {contactMethods.map((method) => {
                 const inner = (
                   <>
-                    <div className="flex items-center justify-center bg-[#6bab8a]/10 rounded-full w-12 h-12 mb-2">
+                    <div className="flex items-center justify-center bg-[#3a2f2f]/10 rounded-full w-12 h-12 mb-2">
                       {method.icon}
                     </div>
-                    <div className="text-xs uppercase tracking-wider text-[#6bab8a] font-semibold mb-1">
+                    <div className="text-xs uppercase tracking-wider text-[#3a2f2f] font-semibold mb-1">
                       {method.label}
                     </div>
-                    <span className="text-white text-base font-medium text-center break-all group-hover:text-[#6bab8a] transition-colors duration-300">
+                    <span className="text-white text-base font-medium text-center break-all group-hover:text-[#3a2f2f] transition-colors duration-300">
                       {method.value}
                     </span>
                   </>

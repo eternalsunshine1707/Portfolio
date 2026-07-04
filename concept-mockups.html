@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Visual Samples</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#050505;color:#fff;overflow:hidden;height:100vh}
+
+/* ── MAIN TABS ── */
+.mtabs{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;gap:4px;padding:8px;background:rgba(5,5,5,.98);border-bottom:1px solid rgba(255,255,255,.07)}
+.mtab{flex:1;padding:10px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:rgba(255,255,255,.4);font-size:.72rem;font-weight:700;cursor:pointer;text-align:center;letter-spacing:.08em;text-transform:uppercase;transition:.2s}
+.mtab.active{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#fff}
+
+.mpanel{display:none;position:fixed;top:42px;left:0;right:0;bottom:0}
+.mpanel.active{display:block}
+
+/* ── SUB TABS (bottom) ── */
+.stabs{position:absolute;bottom:0;left:0;right:0;z-index:100;display:flex;gap:4px;padding:7px;background:rgba(5,5,5,.96);border-top:1px solid rgba(255,255,255,.06)}
+.stab{flex:1;padding:8px 4px;border-radius:5px;border:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.3);font-size:.62rem;font-weight:700;cursor:pointer;text-align:center;letter-spacing:.04em;text-transform:uppercase;transition:.2s}
+.stab.active{border-color:rgba(255,255,255,.2);color:#fff;background:rgba(255,255,255,.07)}
+
+.spanel{display:none;position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:44px!important;overflow:hidden}
+.spanel.active{display:block}
+
+/* ── HERO OVERLAY (shared for BG previews) ── */
+.hero-ov{position:absolute;inset:0;display:flex;align-items:center;padding:64px;z-index:10;pointer-events:none}
+.hero-ov h1{font-size:clamp(2.6rem,4.5vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+.hero-ov p{font-size:.95rem;color:rgba(255,255,255,.45);line-height:1.8;max-width:440px;margin-bottom:28px}
+.hero-ov .tag{font-size:.68rem;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:18px}
+.hero-ov .btns{display:flex;gap:12px;pointer-events:all}
+.btn-a{padding:11px 24px;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer}
+.btn-b{padding:11px 24px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.1);border-radius:8px;font-weight:600;font-size:.8rem;cursor:pointer}
+
+/* ════════════════════════════════
+   BG 1 — GRADIENT MESH ORBS
+════════════════════════════════ */
+#bg1{background:#050505;position:relative;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.orb-a{width:550px;height:550px;background:radial-gradient(circle,rgba(139,92,246,.3),transparent 70%);top:-80px;right:-60px;animation:da 13s ease-in-out infinite alternate}
+.orb-b{width:450px;height:450px;background:radial-gradient(circle,rgba(59,130,246,.22),transparent 70%);bottom:-80px;left:-60px;animation:db 16s ease-in-out infinite alternate}
+.orb-c{width:360px;height:360px;background:radial-gradient(circle,rgba(236,72,153,.18),transparent 70%);top:35%;right:28%;animation:dc 11s ease-in-out infinite alternate}
+@keyframes da{to{transform:translate(-70px,55px) scale(1.12)}}
+@keyframes db{to{transform:translate(55px,-70px) scale(1.08)}}
+@keyframes dc{to{transform:translate(35px,-35px) scale(.92)}}
+
+/* ════════════════════════════════
+   BG 2 — RADIAL GLOW + NOISE
+════════════════════════════════ */
+#bg2{background:#050505;position:relative;overflow:hidden}
+#bg2::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 48%,rgba(255,255,255,.045),transparent);animation:bg2-breathe 5s ease-in-out infinite}
+#bg2::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.022;pointer-events:none}
+@keyframes bg2-breathe{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.04);top:50%;left:50%}
+.ring1{width:240px;height:240px;margin:-120px 0 0 -120px;animation:ring-p 5s ease-in-out infinite}
+.ring2{width:420px;height:420px;margin:-210px 0 0 -210px;animation:ring-p 5s ease-in-out .9s infinite}
+.ring3{width:620px;height:620px;margin:-310px 0 0 -310px;animation:ring-p 5s ease-in-out 1.8s infinite}
+@keyframes ring-p{0%,100%{opacity:.25;transform:scale(.97)}50%{opacity:.6;transform:scale(1.02)}}
+
+/* ════════════════════════════════
+   BG 3 — PERSPECTIVE GRID
+════════════════════════════════ */
+#bg3{background:#050505;position:relative;overflow:hidden}
+.grid-plane{position:absolute;bottom:-10%;left:-50%;right:-50%;height:65%;transform:rotateX(72deg);transform-origin:bottom center;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:48px 48px;animation:grid-scroll 3.5s linear infinite}
+.grid-fade{position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to top,#050505,transparent)}
+.grid-top-fade{position:absolute;top:0;left:0;right:0;height:55%;background:linear-gradient(to bottom,#050505 30%,transparent)}
+@keyframes grid-scroll{from{background-position:0 0}to{background-position:0 48px}}
+
+/* ════════════════════════════════
+   BG 4 — PURE DARK (clean)
+════════════════════════════════ */
+#bg4{background:#050505;position:relative}
+.vert-line{position:absolute;left:56px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 0%,rgba(255,255,255,.06) 25%,rgba(255,255,255,.06) 75%,transparent 100%)}
+
+/* ════════════════════════════════
+   PROJECT SHARED
+════════════════════════════════ */
+.proj-wrap{position:absolute;inset:0;background:#050505;padding:40px 48px;overflow-y:auto}
+.proj-wrap h2{font-size:1.7rem;font-weight:800;margin-bottom:6px;letter-spacing:-.02em}
+.proj-wrap .sub{color:rgba(255,255,255,.3);font-size:.8rem;margin-bottom:32px}
+.ptag{font-size:.58rem;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.pname{font-size:.95rem;font-weight:700;margin-bottom:7px}
+.pdesc{font-size:.75rem;color:rgba(255,255,255,.38);line-height:1.65}
+
+/* ── PROJ 1: BENTO GRID ── */
+#proj1 .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:190px 190px;gap:10px}
+.bc{border-radius:12px;border:1px solid rgba(255,255,255,.07);padding:22px;cursor:pointer;position:relative;overflow:hidden;background:rgba(255,255,255,.02);transition:border-color .3s,transform .25s}
+.bc:hover{border-color:rgba(255,255,255,.22);transform:translateY(-3px)}
+.bc.big{grid-column:span 2;background:rgba(255,255,255,.03)}
+.bc.tall{grid-row:span 2;background:rgba(255,255,255,.03)}
+.bc .ghost-num{position:absolute;bottom:14px;right:18px;font-size:3rem;font-weight:900;color:rgba(255,255,255,.04);line-height:1}
+/* Mouse glow on bento cards */
+.bc::after{content:'';position:absolute;inset:0;background:radial-gradient(circle 160px at var(--mx,50%) var(--my,50%),rgba(255,255,255,.04),transparent);opacity:0;transition:.25s;pointer-events:none;border-radius:12px}
+.bc:hover::after{opacity:1}
+
+/* ── PROJ 2: SPOTLIGHT ── */
+#proj2 .sg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sc{border-radius:12px;border:1px solid rgba(255,255,255,.06);padding:22px;cursor:pointer;position:relative;overflow:hidden;background:#050505;transition:border-color .3s}
+.sc:hover{border-color:rgba(255,255,255,.22)}
+.sc .spot{position:absolute;inset:0;border-radius:12px;opacity:0;transition:opacity .2s;pointer-events:none}
+.sc:hover .spot{opacity:1}
+
+/* ── PROJ 3: HORIZONTAL SCROLL ── */
+#proj3 .htrack{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding:2px 0 16px;cursor:grab;user-select:none}
+#proj3 .htrack:active{cursor:grabbing}
+#proj3 .htrack::-webkit-scrollbar{display:none}
+.hc{flex-shrink:0;width:300px;border-radius:12px;border:1px solid rgba(255,255,255,.07);overflow:hidden;background:rgba(255,255,255,.02);transition:border-color .3s,transform .25s}
+.hc:hover{border-color:rgba(255,255,255,.2);transform:translateY(-3px)}
+.hc .himg{height:150px;display:flex;align-items:center;justify-content:center;font-size:2.2rem}
+.hg1{background:linear-gradient(135deg,#0d0818,#1a1035)}
+.hg2{background:linear-gradient(135deg,#081018,#0f2035)}
+.hg3{background:linear-gradient(135deg,#08180d,#0f3515)}
+.hg4{background:linear-gradient(135deg,#180808,#350f0f)}
+.hg5{background:linear-gradient(135deg,#181208,#352a0f)}
+.hg6{background:linear-gradient(135deg,#0d0d18,#151535)}
+.hc .hinfo{padding:18px}
+.drag-hint{font-size:.68rem;color:rgba(255,255,255,.2);letter-spacing:.1em;text-transform:uppercase;margin-top:8px;text-align:center}
+
+/* ── PROJ 4: STACKED ── */
+#proj4 .stack-wrap{position:relative;height:260px;max-width:480px;margin:0 auto}
+.stk{position:absolute;width:100%;border-radius:14px;border:1px solid rgba(255,255,255,.08);padding:26px;cursor:pointer;transition:all .45s cubic-bezier(.16,1,.3,1)}
+.stk .stk-tag{font-size:.58rem;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin-bottom:9px}
+.stk .stk-name{font-size:1.1rem;font-weight:700;margin-bottom:7px}
+.stk .stk-desc{font-size:.76rem;color:rgba(255,255,255,.38);line-height:1.65}
+#proj4 .stack-note{text-align:center;color:rgba(255,255,255,.2);font-size:.7rem;letter-spacing:.06em;margin-top:20px}
+
+/* ── PROJ 5: FULLSCREEN TAKEOVER ── */
+#proj5 .ftg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ftc{border-radius:12px;border:1px solid rgba(255,255,255,.07);padding:22px;cursor:pointer;background:rgba(255,255,255,.02);transition:all .3s;position:relative}
+.ftc:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.04);transform:translateY(-2px)}
+.ftc .hint{position:absolute;top:14px;right:14px;font-size:.58rem;color:rgba(255,255,255,.18);letter-spacing:.06em;text-transform:uppercase}
+.to{position:fixed;inset:0;background:rgba(5,5,5,.0);z-index:8000;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:background .35s}
+.to.open{background:rgba(5,5,5,.96);pointer-events:all}
+.to-inner{max-width:640px;width:88%;padding:56px;opacity:0;transform:translateY(24px);transition:opacity .35s .1s, transform .35s .1s}
+.to.open .to-inner{opacity:1;transform:translateY(0)}
+.to-close{position:absolute;top:28px;right:28px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);padding:8px 18px;border-radius:8px;cursor:pointer;font-size:.76rem;font-weight:600;transition:.2s}
+.to-close:hover{background:rgba(255,255,255,.12);color:#fff}
+.to h2{font-size:2.2rem;font-weight:800;letter-spacing:-.02em;margin:14px 0 18px}
+.to p{font-size:.95rem;color:rgba(255,255,255,.5);line-height:1.85;margin-bottom:28px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);padding:6px 14px;border-radius:100px;font-size:.72rem;font-weight:500}
+</style>
+</head>
+<body>
+
+<!-- MAIN TABS -->
+<div class="mtabs">
+  <div class="mtab active" onclick="mShow('mbg',this)">Backgrounds (4 options)</div>
+  <div class="mtab" onclick="mShow('mproj',this)">Project Layouts (5 options)</div>
+</div>
+
+
+<!-- ════════════ BACKGROUNDS ════════════ -->
+<div id="mbg" class="mpanel active">
+  <div class="stabs">
+    <div class="stab active" onclick="sShow('mbg','bg1',this)">1 · Gradient Mesh</div>
+    <div class="stab" onclick="sShow('mbg','bg2',this)">2 · Radial Glow</div>
+    <div class="stab" onclick="sShow('mbg','bg3',this)">3 · Perspective Grid</div>
+    <div class="stab" onclick="sShow('mbg','bg4',this)">4 · Pure Dark</div>
+  </div>
+
+  <!-- BG1 -->
+  <div id="bg1" class="spanel active">
+    <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+    <div class="hero-ov">
+      <div>
+        <div class="tag">Data Engineer · Analyst · AWS Certified</div>
+        <h1>Hi! I'm<br/><span style="color:#a78bfa">Sravani B</span></h1>
+        <p>7+ years building pipelines, dashboards, and architectures that scale.</p>
+        <div class="btns">
+          <button class="btn-a" style="background:#a78bfa;color:#fff">View My Work</button>
+          <button class="btn-b">Get in Touch →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BG2 -->
+  <div id="bg2" class="spanel">
+    <div class="ring ring1"></div><div class="ring ring2"></div><div class="ring ring3"></div>
+    <div class="hero-ov">
+      <div>
+        <div class="tag">Data Engineer · Analyst · AWS Certified</div>
+        <h1>Hi! I'm<br/><span style="color:#f1f5f9">Sravani B</span></h1>
+        <p>7+ years building pipelines, dashboards, and architectures that scale.</p>
+        <div class="btns">
+          <button class="btn-a" style="background:#fff;color:#050505">View My Work</button>
+          <button class="btn-b">Get in Touch →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BG3 -->
+  <div id="bg3" class="spanel">
+    <div class="grid-plane"></div>
+    <div class="grid-fade"></div>
+    <div class="grid-top-fade"></div>
+    <div class="hero-ov">
+      <div>
+        <div class="tag">Data Engineer · Analyst · AWS Certified</div>
+        <h1>Hi! I'm<br/><span style="color:#38bdf8">Sravani B</span></h1>
+        <p>7+ years building pipelines, dashboards, and architectures that scale.</p>
+        <div class="btns">
+          <button class="btn-a" style="background:#38bdf8;color:#050505">View My Work</button>
+          <button class="btn-b">Get in Touch →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BG4 -->
+  <div id="bg4" class="spanel">
+    <div class="vert-line"></div>
+    <div class="hero-ov">
+      <div>
+        <div class="tag">Data Engineer · Analyst · AWS Certified</div>
+        <h1>Hi! I'm<br/><span style="color:#f59e0b">Sravani B</span></h1>
+        <p>7+ years building pipelines, dashboards, and architectures that scale.</p>
+        <div class="btns">
+          <button class="btn-a" style="background:#f59e0b;color:#050505">View My Work</button>
+          <button class="btn-b">Get in Touch →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════ PROJECTS ════════════ -->
+<div id="mproj" class="mpanel">
+  <div class="stabs">
+    <div class="stab active" onclick="sShow('mproj','proj1',this)">1 · Bento Grid</div>
+    <div class="stab" onclick="sShow('mproj','proj2',this)">2 · Spotlight</div>
+    <div class="stab" onclick="sShow('mproj','proj3',this)">3 · H-Scroll Reel</div>
+    <div class="stab" onclick="sShow('mproj','proj4',this)">4 · Stacked Cards</div>
+    <div class="stab" onclick="sShow('mproj','proj5',this)">5 · Full Takeover</div>
+  </div>
+
+  <!-- PROJ 1: BENTO -->
+  <div id="proj1" class="spanel">
+    <div class="proj-wrap">
+      <h2>Projects</h2><p class="sub">Hover any card</p>
+      <div class="bento">
+        <div class="bc big"><div class="ptag">Machine Learning</div><div class="pname">Big Sales Prediction</div><div class="pdesc">Random Forest on 14,204 retail entries · inventory forecasting · demand analysis</div><div class="ghost-num">ML</div></div>
+        <div class="bc tall"><div class="ptag">Analytics · R</div><div class="pname">Graph Analytics</div><div class="pdesc">10M node trust network · igraph · sna · centrality measures</div><div class="ghost-num">R</div></div>
+        <div class="bc"><div class="ptag">ETL · Cloud</div><div class="pname">Zurich Insurance Pipeline</div><div class="pdesc">AWS Glue · PySpark · 35% faster</div></div>
+        <div class="bc"><div class="ptag">Serverless</div><div class="pname">Lambda Scheduler</div><div class="pdesc">$7.5K/mo saved · 98% SLA</div></div>
+        <div class="bc"><div class="ptag">Systems</div><div class="pname">CISC Simulator</div><div class="pdesc">Java · Assembly · branch prediction</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJ 2: SPOTLIGHT -->
+  <div id="proj2" class="spanel">
+    <div class="proj-wrap">
+      <h2>Projects</h2><p class="sub">Hover a card — spotlight follows your cursor</p>
+      <div class="sg" id="sg">
+        <div class="sc"><div class="spot"></div><div class="ptag">Machine Learning</div><div class="pname">Big Sales Prediction</div><div class="pdesc">Random Forest · 14,204 entries · forecasting</div></div>
+        <div class="sc"><div class="spot"></div><div class="ptag">Analytics · R</div><div class="pname">Graph Analytics</div><div class="pdesc">10M node trust network · igraph · sna</div></div>
+        <div class="sc"><div class="spot"></div><div class="ptag">ETL · Cloud</div><div class="pname">Zurich Insurance Pipeline</div><div class="pdesc">AWS Glue · PySpark · 35% faster</div></div>
+        <div class="sc"><div class="spot"></div><div class="ptag">Serverless</div><div class="pname">Lambda Scheduler</div><div class="pdesc">$7.5K/mo saved · 98% SLA adherence</div></div>
+        <div class="sc"><div class="spot"></div><div class="ptag">Systems</div><div class="pname">CISC Simulator</div><div class="pdesc">Java · Assembly · cache + branch prediction</div></div>
+        <div class="sc"><div class="spot"></div><div class="ptag">Analytics</div><div class="pname">Power BI Dashboards</div><div class="pdesc">Tidel · real-time KPIs · Python cleaning</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJ 3: H-SCROLL -->
+  <div id="proj3" class="spanel">
+    <div class="proj-wrap">
+      <h2>Projects</h2><p class="sub">Drag to browse →</p>
+      <div class="htrack" id="ht">
+        <div class="hc"><div class="himg hg1">🤖</div><div class="hinfo"><div class="ptag">Machine Learning</div><div class="pname">Big Sales Prediction</div><div class="pdesc">Random Forest · 14,204 entries</div></div></div>
+        <div class="hc"><div class="himg hg2">📊</div><div class="hinfo"><div class="ptag">Analytics · R</div><div class="pname">Graph Analytics</div><div class="pdesc">10M nodes · igraph · sna</div></div></div>
+        <div class="hc"><div class="himg hg3">☁️</div><div class="hinfo"><div class="ptag">ETL · Cloud</div><div class="pname">Zurich Insurance Pipeline</div><div class="pdesc">AWS Glue · PySpark · 35% faster</div></div></div>
+        <div class="hc"><div class="himg hg4">⚡</div><div class="hinfo"><div class="ptag">Serverless</div><div class="pname">Lambda Scheduler</div><div class="pdesc">$7.5K/mo saved · 98% SLA</div></div></div>
+        <div class="hc"><div class="himg hg5">💻</div><div class="hinfo"><div class="ptag">Systems</div><div class="pname">CISC Simulator</div><div class="pdesc">Java · Assembly · branch prediction</div></div></div>
+        <div class="hc"><div class="himg hg6">📈</div><div class="hinfo"><div class="ptag">Analytics</div><div class="pname">Power BI Dashboards</div><div class="pdesc">Tidel · real-time KPIs · Python</div></div></div>
+      </div>
+      <div class="drag-hint">← drag to browse →</div>
+    </div>
+  </div>
+
+  <!-- PROJ 4: STACKED -->
+  <div id="proj4" class="spanel">
+    <div class="proj-wrap">
+      <h2>Projects</h2><p class="sub">Click the top card to flip through</p>
+      <div class="stack-wrap" id="sw">
+        <div class="stk" style="top:0;z-index:5;background:rgba(255,255,255,.055)"><div class="stk-tag">Machine Learning</div><div class="stk-name">Big Sales Prediction</div><div class="stk-desc">Random Forest on 14,204 retail entries for inventory forecasting and demand analysis</div></div>
+        <div class="stk" style="top:13px;z-index:4;transform:scale(.96);background:rgba(255,255,255,.035)"><div class="stk-tag">Analytics · R</div><div class="stk-name">Graph Analytics</div><div class="stk-desc">10M node trust network analysis using igraph and sna in R</div></div>
+        <div class="stk" style="top:24px;z-index:3;transform:scale(.92);background:rgba(255,255,255,.02)"><div class="stk-tag">ETL · Cloud</div><div class="stk-name">Zurich Insurance Pipeline</div><div class="stk-desc">AWS Glue + PySpark achieving 35% faster processing and 98% SLA</div></div>
+        <div class="stk" style="top:33px;z-index:2;transform:scale(.88);background:rgba(255,255,255,.01)"><div class="stk-tag">Serverless</div><div class="stk-name">Lambda Scheduler</div><div class="stk-desc">AWS Lambda logic saving $7.5K/month with 98% SLA adherence</div></div>
+        <div class="stk" style="top:40px;z-index:1;transform:scale(.84);background:rgba(255,255,255,.006)"><div class="stk-tag">Systems</div><div class="stk-name">CISC Simulator</div><div class="stk-desc">Full CISC architecture simulator with cache and branch prediction in Java</div></div>
+      </div>
+      <p class="stack-note">Click top card to cycle ↓</p>
+    </div>
+  </div>
+
+  <!-- PROJ 5: FULLSCREEN TAKEOVER -->
+  <div id="proj5" class="spanel">
+    <div class="proj-wrap">
+      <h2>Projects</h2><p class="sub">Click any card to expand fullscreen</p>
+      <div class="ftg">
+        <div class="ftc" onclick="openTo('Machine Learning','Big Sales Prediction','Random Forest model trained on 14,204 retail entries. Predicts sales demand for inventory optimization — reduced overstock risk by analyzing seasonal patterns and product trends.','Python,scikit-learn,Pandas,Random Forest,Matplotlib')"><div class="hint">tap to expand ↗</div><div class="ptag">Machine Learning</div><div class="pname">Big Sales Prediction</div><div class="pdesc">Random Forest · 14,204 entries · forecasting</div></div>
+        <div class="ftc" onclick="openTo('Analytics · R','Graph Analytics','Trust network analysis on a 10M node graph. Used igraph and sna to calculate centrality, identify key influencers, and detect community clusters at scale.','R,igraph,sna,ggplot2,Network Analysis')"><div class="hint">tap to expand ↗</div><div class="ptag">Analytics · R</div><div class="pname">Graph Analytics</div><div class="pdesc">10M nodes · igraph · trust networks</div></div>
+        <div class="ftc" onclick="openTo('ETL · Cloud','Zurich Insurance Pipeline','End-to-end ETL processing millions of insurance records daily. Built on AWS Glue and PySpark with Databricks optimization — 35% faster processing, 98% SLA maintained.','AWS Glue,PySpark,Databricks,S3,Python')"><div class="hint">tap to expand ↗</div><div class="ptag">ETL · Cloud</div><div class="pname">Zurich Insurance Pipeline</div><div class="pdesc">AWS Glue · PySpark · 35% faster</div></div>
+        <div class="ftc" onclick="openTo('Serverless','Lambda Scheduler','AWS Lambda scheduling system that intelligently reschedules jobs to avoid SLA breaches. Saves $7.5K per month in penalties with 98% SLA adherence across all jobs.','AWS Lambda,Python,CloudWatch,SNS,Serverless')"><div class="hint">tap to expand ↗</div><div class="ptag">Serverless</div><div class="pname">Lambda Scheduler</div><div class="pdesc">$7.5K/mo saved · 98% SLA</div></div>
+        <div class="ftc" onclick="openTo('Systems','CISC Simulator','Full CISC architecture simulator in Java — instruction pipeline, cache simulation, and branch prediction. Built for Computer Architecture at George Mason University.','Java,Assembly,CISC,Cache,Branch Prediction')"><div class="hint">tap to expand ↗</div><div class="ptag">Systems</div><div class="pname">CISC Simulator</div><div class="pdesc">Java · Assembly · cache + branch prediction</div></div>
+        <div class="ftc" onclick="openTo('Analytics','Power BI Dashboards','Real-time operational dashboards for Tidel Engineering tracking ATM fleet KPIs. Python data cleaning pipeline feeding Power BI with live refresh and automated reporting.','Power BI,Python,Pandas,DAX,SQL')"><div class="hint">tap to expand ↗</div><div class="ptag">Analytics</div><div class="pname">Power BI Dashboards</div><div class="pdesc">Tidel · real-time KPIs · Python</div></div>
+      </div>
+    </div>
+    <!-- Takeover overlay -->
+    <div class="to" id="to">
+      <button class="to-close" onclick="closeTo()">✕ Close</button>
+      <div class="to-inner">
+        <div class="ptag" id="to-tag"></div>
+        <h2 id="to-name"></h2>
+        <p id="to-desc"></p>
+        <div class="pills" id="to-pills"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* ── Tab switching ── */
+function mShow(id, tab) {
+  document.querySelectorAll('.mpanel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.mtab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  tab.classList.add('active');
+}
+function sShow(parent, id, tab) {
+  const p = document.getElementById(parent);
+  p.querySelectorAll('.spanel').forEach(s => s.classList.remove('active'));
+  p.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  tab.classList.add('active');
+}
+
+/* ── Bento: mouse glow ── */
+document.querySelectorAll('.bc').forEach(c => {
+  c.addEventListener('mousemove', e => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+/* ── Spotlight: cursor tracking ── */
+document.querySelectorAll('.sc').forEach(c => {
+  c.addEventListener('mousemove', e => {
+    const r = c.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    c.querySelector('.spot').style.background =
+      `radial-gradient(circle 170px at ${x}px ${y}px, rgba(255,255,255,.07), transparent)`;
+    c.querySelector('.spot').style.opacity = '1';
+  });
+  c.addEventListener('mouseleave', e => {
+    c.querySelector('.spot').style.opacity = '0';
+  });
+});
+
+/* ── H-Scroll: drag ── */
+const ht = document.getElementById('ht');
+let drag = false, startX, scrollL;
+ht.addEventListener('mousedown', e => { drag = true; startX = e.pageX - ht.offsetLeft; scrollL = ht.scrollLeft; });
+document.addEventListener('mouseup', () => drag = false);
+ht.addEventListener('mousemove', e => {
+  if (!drag) return;
+  e.preventDefault();
+  ht.scrollLeft = scrollL - (e.pageX - ht.offsetLeft - startX);
+});
+
+/* ── Stacked: click to cycle ── */
+const sw = document.getElementById('sw');
+if (sw) {
+  sw.addEventListener('click', () => {
+    const cards = [...sw.querySelectorAll('.stk')];
+    const top = cards[0];
+    // Slide top card out
+    top.style.transition = 'all .4s cubic-bezier(.16,1,.3,1)';
+    top.style.transform = 'translateX(-110%) rotate(-6deg)';
+    top.style.opacity = '0';
+    setTimeout(() => {
+      sw.appendChild(top); // move to bottom
+      top.style.transition = 'none';
+      top.style.opacity = '';
+      top.style.transform = '';
+      restack();
+    }, 420);
+  });
+
+  function restack() {
+    const cards = [...sw.querySelectorAll('.stk')];
+    const bgs = [.055,.035,.02,.01,.006];
+    const scales = [1,.96,.92,.88,.84];
+    const tops = [0,13,24,33,40];
+    setTimeout(() => {
+      cards.forEach((c, i) => {
+        c.style.transition = 'all .4s cubic-bezier(.16,1,.3,1)';
+        c.style.top = tops[i] + 'px';
+        c.style.transform = i === 0 ? 'none' : `scale(${scales[i]})`;
+        c.style.zIndex = 5 - i;
+        c.style.background = `rgba(255,255,255,${bgs[i]})`;
+      });
+    }, 30);
+  }
+}
+
+/* ── Fullscreen takeover ── */
+function openTo(tag, name, desc, pills) {
+  document.getElementById('to-tag').textContent = tag;
+  document.getElementById('to-name').textContent = name;
+  document.getElementById('to-desc').textContent = desc;
+  document.getElementById('to-pills').innerHTML = pills.split(',').map(p => `<span class="pill">${p.trim()}</span>`).join('');
+  document.getElementById('to').classList.add('open');
+}
+function closeTo() {
+  document.getElementById('to').classList.remove('open');
+}
+// Close on backdrop click
+document.getElementById('to').addEventListener('click', e => {
+  if (e.target === document.getElementById('to')) closeTo();
+});
+</script>
+</body>
+</html>

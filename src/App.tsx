@@ -8,11 +8,13 @@ import Education from './components/Education';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import GlobalBackground from './components/GlobalBackground';
+import CurtainOverlay from './components/CurtainOverlay';
 
 function App() {
   return (
     <div className="min-h-screen relative">
       <GlobalBackground />
+      <CurtainOverlay />
       <div className="relative z-10">
         <Header />
         <Hero />
