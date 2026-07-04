@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 
@@ -65,151 +65,151 @@ const projects: Project[] = [
   }
 ];
 
-const Projects = () => {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+/** Cursor-following beige glow, shown on hover — same pattern as Dashboard.tsx's HoverGlow */
+const HoverGlow = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--my', `${e.clientY - rect.top}px`);
+  };
+  return (
+    <div ref={ref} onMouseMove={handleMove} className="absolute inset-0 pointer-events-none z-20">
+      <span
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: 'radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(201,182,148,0.18), transparent 65%)' }}
+      />
+    </div>
+  );
+};
 
+/** Golden traveling-light border on hover — same technique as Dashboard.tsx's CardShimmerBorder */
+const CardShimmerBorder = () => (
+  <span
+    aria-hidden
+    className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
+    style={{
+      border: '1.5px solid transparent',
+      WebkitMask: 'linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0)',
+      WebkitMaskComposite: 'xor',
+      maskComposite: 'exclude',
+    }}
+  >
+    <span className="absolute inset-0 overflow-visible blur-[2px]" style={{ containerType: 'size' } as React.CSSProperties}>
+      <span
+        className="absolute inset-0"
+        style={{ height: '100cqh', aspectRatio: '2', borderRadius: 0, animation: 'shimmerSlide 3.6s ease-in-out infinite alternate' }}
+      >
+        <span
+          className="absolute -inset-full rotate-0"
+          style={{
+            background: 'conic-gradient(from calc(270deg - 45deg), transparent 0, #c9b694 90deg, transparent 90deg)',
+            animation: 'spinAround 3.6s linear infinite',
+          }}
+        />
+      </span>
+    </span>
+  </span>
+);
+
+const CardEffects = () => (
+  <>
+    <HoverGlow />
+    <CardShimmerBorder />
+  </>
+);
+
+const Projects = () => {
   return (
     <section id="projects" className="min-h-screen py-24 relative overflow-hidden">
       <div className="w-full px-8 xl:px-12">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl lg:text-5xl font-bold text-white mb-16 text-center"
+          className="text-4xl lg:text-5xl font-bold text-[#c9b694] mb-16 text-center"
         >
           THINGS I'VE BUILT
         </motion.h1>
 
-        {/* Projects List */}
-        <div className="max-w-6xl mx-auto space-y-24">
+        {/* Projects Grid — all 3 fit in one row on desktop, full-width to match Dashboard/Hero */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              onHoverStart={() => setHoveredId(project.id)}
-              onHoverEnd={() => setHoveredId(null)}
-              className={`relative group ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'} flex flex-col lg:flex-row items-center gap-8 lg:gap-12`}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: (index % 2) * 0.15 }}
+              whileHover={{ y: -8 }}
+              className="group relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden flex flex-col"
             >
+              <CardEffects />
+
               {/* Project Image */}
-              <div className="lg:w-3/5 w-full">
-                <motion.div 
-                  className="relative rounded-xl overflow-hidden w-full h-[400px]"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent opacity-60 z-10"
-                    initial={{ opacity: 0.28 }}
-                    animate={{ opacity: hoveredId === project.id ? 0.12 : 0.28 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#3a2f2f]/20 to-purple-500/20 opacity-0 transition-opacity duration-300"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: hoveredId === project.id ? 0.2 : 0 }}
-                  />
-                </motion.div>
+              <div className="relative w-full h-80 overflow-hidden">
+                <motion.img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.4 }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent opacity-70" />
               </div>
 
               {/* Project Info */}
-              <div className="lg:w-2/5 w-full">
-                <motion.div
-                  initial={{ x: index % 2 === 0 ? 20 : -20 }}
-                  animate={{ x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="relative"
-                >
-                  <motion.span 
-                    className="text-[#3a2f2f] text-sm font-medium mb-2 block"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    {project.category}
-                  </motion.span>
-                  <motion.h3 
-                    className="text-2xl font-bold text-white mb-4 group-hover:text-[#3a2f2f] transition-colors"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    {project.title}
-                  </motion.h3>
-                  <motion.div 
-                    className="bg-white/5 backdrop-blur-sm p-6 rounded-xl mb-6"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <p className="text-gray-300 text-lg leading-relaxed">
-                      {project.description}
-                    </p>
-                  </motion.div>
+              <div className="relative p-6 flex flex-col flex-1 z-10">
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#c9b694] transition-colors">
+                  {project.title}
+                </h3>
 
-                  {/* Technologies */}
-                  <motion.div 
-                    className="flex flex-wrap gap-2 mb-6"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    {project.technologies.map((tech, idx) => (
-                      <motion.span
-                        key={idx}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.5 + (idx * 0.1) }}
-                        whileHover={{ scale: 1.1 }}
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${tech.color} bg-opacity-20 text-white`}
-                      >
-                        {tech.name}
-                      </motion.span>
-                    ))}
-                  </motion.div>
+                <p className="text-gray-300 text-base leading-relaxed mb-6 flex-1">
+                  {project.description}
+                </p>
 
-                  {/* Links */}
-                  <motion.div 
-                    className="flex items-center gap-6"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 }}
-                  >
-                    {project.githubUrl && (
-                      <motion.a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-[#3a2f2f] transition-colors flex items-center gap-2 group/link"
-                        whileHover={{ x: 5 }}
-                      >
-                        <Github size={20} />
-                        <span className="text-sm font-medium">View Source</span>
-                        <ArrowRight size={16} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
-                      </motion.a>
-                    )}
-                    {project.liveUrl && (
-                      <motion.a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-[#3a2f2f] transition-colors flex items-center gap-2 group/link"
-                        whileHover={{ x: 5 }}
-                      >
-                        <ExternalLink size={20} />
-                        <span className="text-sm font-medium">Live Demo</span>
-                        <ArrowRight size={16} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
-                      </motion.a>
-                    )}
-                  </motion.div>
-                </motion.div>
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.technologies.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${tech.color} bg-opacity-20 text-white`}
+                    >
+                      {tech.name}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Links */}
+                <div className="flex items-center gap-6">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-[#c9b694] transition-colors flex items-center gap-2 group/link"
+                    >
+                      <Github size={20} />
+                      <span className="text-sm font-medium">View Source</span>
+                      <ArrowRight size={16} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
+                    </a>
+                  )}
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-[#c9b694] transition-colors flex items-center gap-2 group/link"
+                    >
+                      <ExternalLink size={20} />
+                      <span className="text-sm font-medium">Live Demo</span>
+                      <ArrowRight size={16} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}

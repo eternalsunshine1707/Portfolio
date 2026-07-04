@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
+import { playWhoosh } from '../utils/playWhoosh';
 
 const STRIP_COUNT = 10;
-const STRIP_COLOR = '#f5f3ee';
+const STRIP_COLOR = '#c9b694';
+export const CURTAIN_TOTAL_MS = 2600 + (STRIP_COUNT - 1) * 90 + 100;
 
 const CurtainOverlay = () => {
   const [playKey, setPlayKey] = useState(0);
 
   useEffect(() => {
-    const handler = () => setPlayKey((k) => k + 1);
+    playWhoosh();
+    const handler = () => {
+      playWhoosh();
+      setPlayKey((k) => k + 1);
+    };
     window.addEventListener('portfolio:curtain', handler);
     return () => window.removeEventListener('portfolio:curtain', handler);
   }, []);

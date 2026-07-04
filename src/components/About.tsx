@@ -45,7 +45,7 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl lg:text-5xl font-bold text-white mb-16 text-center"
+          className="text-4xl lg:text-5xl font-bold text-[#c9b694] mb-16 text-center"
         >
           ABOUT ME
         </motion.h1>
@@ -96,8 +96,8 @@ const About = () => {
                 {SLIDES.map((_, idx) => (
                   <button
                     key={idx}
-                    className={`w-2.5 h-2.5 rounded-full ${slide === idx ? 'bg-[#3a2f2f]' : 'bg-white/30'} border-none outline-none transition-colors`}
-                    style={{ boxShadow: slide === idx ? '0 0 6px #3a2f2f' : undefined }}
+                    className={`w-2.5 h-2.5 rounded-full ${slide === idx ? 'bg-[#c9b694]' : 'bg-white/30'} border-none outline-none transition-colors`}
+                    style={{ boxShadow: slide === idx ? '0 0 6px #c9b694' : undefined }}
                     onClick={() => setSlide(idx)}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
@@ -121,7 +121,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-[#3a2f2f] text-xl font-medium mb-6"
+                className="text-[#c9b694] text-xl font-medium mb-6"
               >
                 I'm graduate student pursuing Master's in Computer Science at The George Washington University, and I'm actively exploring new opportunities as a Data Engineer. This website was made to showcase everything I can do and plan to do. Don't judge my writing based on this section, though - this is by far my shoddiest work yet!
               </motion.h3>
@@ -142,7 +142,7 @@ const About = () => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="text-white text-xl leading-relaxed text-justify"
                 >
-                  My love for development, though, started way before this pseudo-perfectionist epiphany. I mean, think about it - "<span className="text-[#3a2f2f]">int i = 10;</span>" magically makes a whole integer? Wow! Watching lines of code morph into apps like Facebook or Amazon? Pure magic. That's when I knew: I wanted to be part of this magic, creating things people actually use and love.
+                  My love for development, though, started way before this pseudo-perfectionist epiphany. I mean, think about it - "<span className="text-[#c9b694]">int i = 10;</span>" magically makes a whole integer? Wow! Watching lines of code morph into apps like Facebook or Amazon? Pure magic. That's when I knew: I wanted to be part of this magic, creating things people actually use and love.
                 </motion.p>
 
                 <motion.p
@@ -163,7 +163,7 @@ const About = () => {
               >
                 <a 
                   href="#contact" 
-                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#3a2f2f] to-[#3a2f2f] text-dark-950 rounded-lg font-semibold hover:from-[#3a2f2f] hover:to-[#3a2f2f] transition-all duration-300 shadow-lg shadow-[#3a2f2f]/25"
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#c9b694] to-[#c9b694] text-dark-950 rounded-lg font-semibold hover:from-[#c9b694] hover:to-[#c9b694] transition-all duration-300 shadow-lg shadow-[#c9b694]/25"
                 >
                   Let's Connect
                 </a>

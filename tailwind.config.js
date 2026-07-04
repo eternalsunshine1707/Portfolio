@@ -32,12 +32,12 @@ export default {
         'open-badge-glow': {
           '0%, 100%': {
             boxShadow:
-              '0 0 14px rgba(34, 197, 94, 0.4), 0 0 28px rgba(34, 197, 94, 0.18), inset 0 0 12px rgba(34, 197, 94, 0.08)',
+              '0 0 14px rgba(201, 182, 148, 0.4), 0 0 28px rgba(201, 182, 148, 0.18), inset 0 0 12px rgba(201, 182, 148, 0.08)',
             opacity: '1',
           },
           '50%': {
             boxShadow:
-              '0 0 22px rgba(34, 197, 94, 0.65), 0 0 48px rgba(34, 197, 94, 0.32), inset 0 0 16px rgba(34, 197, 94, 0.12)',
+              '0 0 22px rgba(201, 182, 148, 0.65), 0 0 48px rgba(201, 182, 148, 0.32), inset 0 0 16px rgba(201, 182, 148, 0.12)',
             opacity: '0.96',
           },
         },

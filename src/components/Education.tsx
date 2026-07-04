@@ -1,7 +1,63 @@
+import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useRef, useState } from 'react';
 import { MapPin, ChevronDown, GraduationCap } from 'lucide-react';
+
+/** Cursor-following beige glow, shown on hover — same pattern as Dashboard.tsx's HoverGlow */
+const HoverGlow = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--my', `${e.clientY - rect.top}px`);
+  };
+  return (
+    <div ref={ref} onMouseMove={handleMove} className="absolute inset-0 pointer-events-none z-20">
+      <span
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: 'radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(201,182,148,0.18), transparent 65%)' }}
+      />
+    </div>
+  );
+};
+
+/** Golden traveling-light border on hover — same technique as Dashboard.tsx's CardShimmerBorder */
+const CardShimmerBorder = () => (
+  <span
+    aria-hidden
+    className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
+    style={{
+      border: '1.5px solid transparent',
+      WebkitMask: 'linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0)',
+      WebkitMaskComposite: 'xor',
+      maskComposite: 'exclude',
+    }}
+  >
+    <span className="absolute inset-0 overflow-visible blur-[2px]" style={{ containerType: 'size' } as React.CSSProperties}>
+      <span
+        className="absolute inset-0"
+        style={{ height: '100cqh', aspectRatio: '2', borderRadius: 0, animation: 'shimmerSlide 3.6s ease-in-out infinite alternate' }}
+      >
+        <span
+          className="absolute -inset-full rotate-0"
+          style={{
+            background: 'conic-gradient(from calc(270deg - 45deg), transparent 0, #c9b694 90deg, transparent 90deg)',
+            animation: 'spinAround 3.6s linear infinite',
+          }}
+        />
+      </span>
+    </span>
+  </span>
+);
+
+const CardEffects = () => (
+  <>
+    <HoverGlow />
+    <CardShimmerBorder />
+  </>
+);
 
 interface Course {
   name: string;
@@ -62,16 +118,21 @@ const educationData: EducationEntry[] = [
 ];
 
 const Education = () => {
-  const containerRef = useRef(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: timelineRef,
     offset: ["start end", "end start"]
   });
 
-  const [ref, inView] = useInView({
+  const [inViewRef, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const setTimelineRefs = (node: HTMLDivElement | null) => {
+    timelineRef.current = node;
+    inViewRef(node);
+  };
 
   const [expandedCourses, setExpandedCourses] = useState<number[]>([]);
 
@@ -86,24 +147,33 @@ const Education = () => {
   const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="education" className="min-h-screen py-24 relative overflow-hidden" ref={containerRef}>
+    <section id="education" className="min-h-screen py-24 relative overflow-hidden">
       <div className="w-full px-8 xl:px-12">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl lg:text-5xl font-bold text-white mb-16 text-center"
+          className="text-4xl lg:text-5xl font-bold text-[#c9b694] mb-16 text-center"
         >
           EDUCATION
         </motion.h1>
 
-        <div className="relative" ref={ref}>
+        <div className="relative" ref={setTimelineRefs}>
           {/* Timeline Line */}
           <div className="absolute left-8 lg:left-1/3 transform lg:-translate-x-px h-full w-px bg-white/10">
             <motion.div
-              className="absolute top-0 left-0 w-full bg-[#3a2f2f]"
+              className="absolute top-0 left-0 w-full bg-[#c9b694]"
               style={{ height: progressHeight }}
             />
+            {/* Traveling light + dot at the leading edge of the fill */}
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              style={{ top: progressHeight }}
+            >
+              <div className="relative w-3 h-3 rounded-full bg-[#c9b694] shadow-[0_0_12px_4px_rgba(201,182,148,0.7)]">
+                <span className="absolute inset-0 rounded-full bg-[#c9b694] opacity-60 animate-ping" />
+              </div>
+            </motion.div>
           </div>
 
           {/* Timeline Entries */}
@@ -137,14 +207,14 @@ const Education = () => {
                     </div>
                   </motion.div>
                   {/* Connecting Line */}
-                  <div className="absolute right-0 top-1/2 w-16 h-px bg-gradient-to-r from-[#3a2f2f]/20 to-[#3a2f2f]" />
+                  <div className="absolute right-0 top-1/2 w-16 h-px bg-gradient-to-r from-[#c9b694]/20 to-[#c9b694]" />
                 </div>
 
                 {/* Timeline Point */}
                 <div className="absolute left-8 lg:left-1/3 transform lg:-translate-x-1/2 w-4 h-4">
-                  <div className="w-4 h-4 rounded-full bg-dark-950 border-2 border-[#3a2f2f] relative">
+                  <div className="w-4 h-4 rounded-full bg-dark-950 border-2 border-[#c9b694] relative">
                     {entry.isCurrentEducation && (
-                      <span className="absolute inset-0 rounded-full animate-ping bg-[#3a2f2f] opacity-75" />
+                      <span className="absolute inset-0 rounded-full animate-ping bg-[#c9b694] opacity-75" />
                     )}
                   </div>
                 </div>
@@ -153,8 +223,10 @@ const Education = () => {
                 <div className="ml-16 lg:ml-6 lg:w-[55%]">
                   <motion.div
                     whileHover={{ scale: 1.02 }}
-                    className="bg-white/5 rounded-xl p-8 backdrop-blur-sm border border-white/10 shadow-xl"
+                    whileTap={{ scale: 0.99 }}
+                    className="group relative bg-white/5 rounded-xl p-8 backdrop-blur-sm border border-white/10 shadow-xl overflow-hidden"
                   >
+                    <CardEffects />
                     {/* Mobile Logo */}
                     <div className="lg:hidden mb-4">
                       <div className="w-20 h-20 rounded-lg overflow-hidden">
@@ -179,7 +251,7 @@ const Education = () => {
                         <h3 className="text-2xl font-bold text-white mb-2">
                           {entry.institution}
                         </h3>
-                        <p className="text-[#3a2f2f] text-sm mb-2">
+                        <p className="text-[#c9b694] text-sm mb-2">
                           {entry.duration}
                         </p>
                         <div className="flex items-center space-x-2 mb-2">
@@ -199,7 +271,7 @@ const Education = () => {
                     <div className="mt-4">
                       <button
                         onClick={() => toggleCourses(entry.id)}
-                        className="flex items-center justify-between w-full text-white hover:text-[#3a2f2f] transition-colors"
+                        className="flex items-center justify-between w-full text-white hover:text-[#c9b694] transition-colors"
                       >
                         <span className="font-medium">Relevant Coursework</span>
                         <ChevronDown
@@ -223,7 +295,7 @@ const Education = () => {
                           {entry.courses.map((course, idx) => (
                             <li key={idx} className="text-gray-300 text-lg">
                               <div className="flex items-start">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#3a2f2f] mt-1.5 mr-2 flex-shrink-0" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#c9b694] mt-1.5 mr-2 flex-shrink-0" />
                                 <div>
                                   <span className="font-medium">{course.name}</span>
                                   <p className="text-gray-400 mt-1">{course.description}</p>

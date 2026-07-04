@@ -1,6 +1,29 @@
 import { motion, useAnimationControls, useInView } from 'framer-motion';
 import { Github, ArrowRight } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { CURTAIN_TOTAL_MS } from './CurtainOverlay';
+
+const BASE = import.meta.env.BASE_URL;
+
+/** Cursor-following beige glow, shown on hover — same pattern used site-wide */
+const HoverGlow = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--my', `${e.clientY - rect.top}px`);
+  };
+  return (
+    <div ref={ref} onMouseMove={handleMove} className="absolute inset-0 pointer-events-none rounded-lg overflow-hidden z-0">
+      <span
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: 'radial-gradient(60px circle at var(--mx, 50%) var(--my, 50%), rgba(201,182,148,0.45), transparent 70%)' }}
+      />
+    </div>
+  );
+};
 
 interface Metric {
   label: string;
@@ -11,12 +34,12 @@ interface Metric {
 }
 
 const METRICS: Metric[] = [
+  { label: 'Years of Experience', value: 8, suffix: '+' },
   { label: 'Records Processed Daily', value: 1, suffix: 'M+' },
   { label: 'Pipeline Runtime Reduction', value: 35, suffix: '%' },
   { label: 'Saved Monthly', value: 7.5, prefix: '$', suffix: 'K', decimals: 1 },
   { label: 'Rows Optimized', value: 50, suffix: 'M+' },
   { label: 'Data Reliability', value: 99, suffix: '%+' },
-  { label: 'Production Pipelines Deployed', value: 10, suffix: '+' },
 ];
 
 const CountUpMetric = ({
@@ -24,28 +47,46 @@ const CountUpMetric = ({
   isSelected,
   isAnyoneSelected,
   onSelect,
+  onDeselect,
 }: {
   metric: Metric;
   isSelected: boolean;
   isAnyoneSelected: boolean;
   onSelect: () => void;
+  onDeselect: () => void;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: false });
   const [display, setDisplay] = useState(0);
+  const hasPlayedOnce = useRef(false);
 
   useEffect(() => {
     if (!inView && !isSelected) return;
     let raf: number;
-    const start = performance.now();
+    let timeoutId: ReturnType<typeof setTimeout>;
     const duration = 1400;
-    const animate = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      setDisplay(metric.value * progress);
-      if (progress < 1) raf = requestAnimationFrame(animate);
+
+    const run = () => {
+      const start = performance.now();
+      const animate = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        setDisplay(metric.value * progress);
+        if (progress < 1) raf = requestAnimationFrame(animate);
+      };
+      raf = requestAnimationFrame(animate);
     };
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
+
+    if (!hasPlayedOnce.current) {
+      hasPlayedOnce.current = true;
+      timeoutId = setTimeout(run, CURTAIN_TOTAL_MS);
+    } else {
+      run();
+    }
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(timeoutId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, isSelected]);
 
@@ -54,18 +95,39 @@ const CountUpMetric = ({
   return (
     <motion.div
       ref={ref}
-      onClick={onSelect}
-      className="cursor-pointer select-none transition-opacity duration-300"
-      style={{ opacity: isAnyoneSelected && !isSelected ? 0.35 : 1 }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.97 }}
+      onHoverStart={onSelect}
+      onHoverEnd={onDeselect}
+      className="flex-1 min-w-0 select-none transition-all duration-300"
+      style={{
+        opacity: isAnyoneSelected && !isSelected ? 0.3 : 1,
+        transform: isSelected ? 'scale(1.12)' : 'scale(1)',
+      }}
     >
-      <div className="text-xl lg:text-2xl font-bold text-[#3a2f2f] whitespace-nowrap">
+      <div
+        className="text-2xl lg:text-3xl font-bold whitespace-nowrap transition-colors duration-300"
+        style={{
+          color: isSelected ? '#fff' : '#c9b694',
+          textShadow: isSelected ? '0 0 18px rgba(201,182,148,0.7)' : 'none',
+        }}
+      >
         {metric.prefix}
         {display.toFixed(decimals)}
         {metric.suffix}
       </div>
-      <div className="text-[11px] text-gray-400 mt-1 whitespace-nowrap">{metric.label}</div>
+      <div
+        className="text-sm mt-1 transition-colors duration-300"
+        style={{ color: isSelected ? '#e8ddc8' : '#9ca3af' }}
+      >
+        {metric.label}
+      </div>
+      <div
+        className="h-[2px] mt-2 rounded-full transition-all duration-300"
+        style={{
+          background: '#c9b694',
+          opacity: isSelected ? 1 : 0,
+          width: isSelected ? '100%' : '0%',
+        }}
+      />
     </motion.div>
   );
 };
@@ -105,26 +167,44 @@ const ViewWorkButton = () => {
       onMouseMove={handleMove}
       whileHover={{ y: -3 }}
       whileTap={{ scale: 0.96 }}
-      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white transition-colors hover:text-[#3a2f2f]"
+      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white transition-colors hover:text-[#c9b694]"
     >
-      {/* Traveling light along the border, like the shivypatel.com CTA */}
+      {/* Traveling light along the border — same technique as shivypatel.com's ShimmerBorder */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-full"
+        className="pointer-events-none absolute inset-0 rounded-[inherit]"
         style={{
-          padding: '1.5px',
-          background: 'conic-gradient(from 0deg, transparent 0%, transparent 90%, #3a2f2f 96%, #fff 98%, #3a2f2f 100%)',
-          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          border: '1.5px solid transparent',
+          WebkitMask: 'linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0)',
           WebkitMaskComposite: 'xor',
           maskComposite: 'exclude',
-          animation: 'spinBorder 2.4s linear infinite',
         }}
-      />
+      >
+        <span className="absolute inset-0 overflow-visible blur-[2px]" style={{ containerType: 'size' } as React.CSSProperties}>
+          <span
+            className="absolute inset-0"
+            style={{
+              height: '100cqh',
+              aspectRatio: '2',
+              borderRadius: 0,
+              animation: 'shimmerSlide 3.6s ease-in-out infinite alternate',
+            }}
+          >
+            <span
+              className="absolute -inset-full rotate-0"
+              style={{
+                background: 'conic-gradient(from calc(270deg - 45deg), transparent 0, #c9b694 90deg, transparent 90deg)',
+                animation: 'spinAround 3.6s linear infinite',
+              }}
+            />
+          </span>
+        </span>
+      </span>
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-25"
         style={{
-          background: 'radial-gradient(140px circle at var(--mx, 50%) var(--my, 50%), #3a2f2f, transparent 60%)',
+          background: 'radial-gradient(140px circle at var(--mx, 50%) var(--my, 50%), #c9b694, transparent 60%)',
         }}
       />
       <span className="relative">View my work</span>
@@ -168,7 +248,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen pt-20 overflow-x-hidden">
+    <section id="home" className="min-h-screen pt-20 overflow-x-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center justify-between min-h-[calc(100vh-5rem)] gap-12">
 
@@ -188,7 +268,7 @@ const Hero = () => {
               className="text-4xl lg:text-6xl font-bold text-white leading-tight mb-8"
             >
               Hi! I'm{' '}
-              <span className="text-[#3a2f2f]">
+              <span className="text-[#c9b694]">
                 Sravani B
               </span>
             </motion.h1>
@@ -199,7 +279,7 @@ const Hero = () => {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 }}
               >
-                I enjoy creating things that live on the Internet. With 7+ years of experience across Data Engineering and Analytics, I've designed pipelines that move millions of records, built dashboards that help teams make faster decisions, and automated workflows that save hours every week. Whether it's architecting an ETL pipeline from scratch or digging into messy data to find the story it's trying to tell - I'm equally at home in both worlds. Currently, I'm actively exploring full-time roles in Data Engineering and Data Analytics.
+                I enjoy creating things that live on the Internet. With 8+ years of experience across Data Engineering and Analytics, I've designed pipelines that move millions of records, built dashboards that help teams make faster decisions, and automated workflows that save hours every week. Whether it's architecting an ETL pipeline from scratch or digging into messy data to find the story it's trying to tell - I'm equally at home in both worlds. Currently, I'm actively exploring full-time roles in Data Engineering and Data Analytics.
               </motion.p>
 
               <motion.p
@@ -224,7 +304,8 @@ const Hero = () => {
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <svg className="w-6 h-6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                  <HoverGlow />
+                  <svg className="w-6 h-6 relative" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fill="#EA4335"
                       d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805l-208 157.459L48 152.805V112h416zM48 400V198.195l208 157.459 208-157.459V400H48z"
@@ -247,7 +328,8 @@ const Hero = () => {
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <svg className="w-6 h-6" fill="#0A66C2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <HoverGlow />
+                  <svg className="w-6 h-6 relative" fill="#0A66C2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
                   <motion.span
@@ -267,7 +349,8 @@ const Hero = () => {
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Github className="w-6 h-6" />
+                  <HoverGlow />
+                  <Github className="w-6 h-6 relative" />
                   <motion.span
                     className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-white opacity-0 group-hover:opacity-100 whitespace-nowrap bg-dark-950/80 px-2 py-1 rounded"
                     initial={{ y: 10 }}
@@ -284,14 +367,15 @@ const Hero = () => {
             </motion.div>
 
             {/* ── IMPACT METRICS ── */}
-            <div className="flex flex-nowrap items-start gap-6 lg:gap-8 mt-14 overflow-x-auto pb-2">
+            <div className="flex flex-nowrap items-start gap-4 lg:gap-6 mt-14 w-full">
               {METRICS.map((metric, index) => (
                 <CountUpMetric
                   key={metric.label}
                   metric={metric}
                   isSelected={selectedMetric === index}
                   isAnyoneSelected={selectedMetric !== null}
-                  onSelect={() => setSelectedMetric(prev => (prev === index ? null : index))}
+                  onSelect={() => setSelectedMetric(index)}
+                  onDeselect={() => setSelectedMetric(prev => (prev === index ? null : prev))}
                 />
               ))}
             </div>
@@ -304,38 +388,36 @@ const Hero = () => {
             className="w-full lg:w-[40%] perspective lg:pl-12"
             style={{ willChange: 'transform, opacity' }}
           >
-            <div className="relative w-full aspect-[4/5] max-w-md mx-auto">
+            <div className="relative w-full aspect-[4/5.4] max-w-md mx-auto">
               <motion.div
                 onClick={() => setImageFlipped((f) => !f)}
                 whileHover={{ scale: 1.02 }}
                 className="group relative w-full h-full rounded-xl overflow-hidden border border-white/10 cursor-pointer bg-gradient-to-br from-white/10 to-white/0"
               >
-                <div
-                  className={`absolute inset-0 flex items-center justify-center text-lg font-semibold text-white/70 bg-gradient-to-br ${
-                    imageFlipped ? 'from-[#2a2a3a] to-[#161622]' : 'from-[#3a2f2f] to-[#1c1616]'
-                  } transition-all duration-500`}
-                >
-                  {imageFlipped ? 'Photo 2 (placeholder)' : 'Photo 1 (placeholder)'}
-                </div>
+                <img
+                  src={`${BASE}${imageFlipped ? 'Kutty1.jpeg' : 'Kutty6.jpeg'}`}
+                  alt={imageFlipped ? 'Sravani, photo 2' : 'Sravani, photo 1'}
+                  className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500"
+                />
 
                 {/* Hover overlay */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="px-5 py-2 rounded-full border border-[#3a2f2f]/60 text-[#3a2f2f] text-sm font-semibold tracking-wide">
+                  <span className="px-5 py-2 rounded-full border border-[#c9b694]/60 text-[#c9b694] text-sm font-semibold tracking-wide">
                     Click me
                   </span>
                 </div>
               </motion.div>
 
               {/* Marching-ants light dashes running just outside this box's edge — no separate box */}
-              <svg className="absolute -inset-3 pointer-events-none" viewBox="0 0 100 125">
+              <svg className="absolute -inset-3 pointer-events-none" viewBox="0 0 100 135">
                 <rect
                   x="1"
                   y="1"
                   width="98"
-                  height="123"
+                  height="133"
                   rx="9"
                   fill="none"
-                  stroke="#3a2f2f"
+                  stroke="#c9b694"
                   strokeWidth="1.6"
                   strokeLinecap="round"
                   strokeDasharray="22 17 9 19"
