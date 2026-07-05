@@ -25,10 +25,10 @@ const Footer = () => {
           </div>
 
           <div>
-            <div className="text-3xl font-bold text-white">
+            <div className="text-3xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
               SRAVANI!
             </div>
-            <div className="text-base text-gray-400 mt-1">
+            <div className="text-base font-bold text-gray-400 mt-1">
               <span className="text-[#c9b694]">Data Engineer</span> | <span className="text-[#c9b694]">Data Analyst</span>
             </div>
           </div>

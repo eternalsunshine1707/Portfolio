@@ -41,7 +41,7 @@ const NavTransitionOverlay = () => {
           style={{
             flex: 1,
             background: STRIP_COLOR,
-            animation: `wipeUp ${WIPE_MS}ms cubic-bezier(0.76,0,0.24,1) ${(STRIP_COUNT - 1 - i) * STAGGER_MS}ms both, curtainFall ${FALL_MS}ms cubic-bezier(0.76,0,0.24,1) ${wipeCompleteMs + i * STAGGER_MS}ms forwards`,
+            animation: `wipeUp ${WIPE_MS}ms cubic-bezier(0.76,0,0.24,1) ${(STRIP_COUNT - 1 - i) * STAGGER_MS}ms both, curtainFall ${FALL_MS}ms cubic-bezier(0.32,0,0.67,0) ${wipeCompleteMs + i * STAGGER_MS}ms forwards`,
           }}
         />
       ))}

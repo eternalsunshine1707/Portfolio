@@ -26,7 +26,7 @@ const CurtainOverlay = () => {
           style={{
             flex: 1,
             background: STRIP_COLOR,
-            animation: `curtainFall 2.6s cubic-bezier(0.76,0,0.24,1) ${i * 0.09}s forwards`,
+            animation: `curtainFall 2.6s cubic-bezier(0.32,0,0.67,0) ${i * 0.09}s forwards`,
           }}
         />
       ))}

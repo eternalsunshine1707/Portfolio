@@ -68,7 +68,7 @@ const ABOUT_ME_PARAGRAPHS = [
 ];
 
 const READING_PARAGRAPHS = [
-  "The Magic by Rhonda Byrne, currently working through this one. Send me a note if you've read it, I'd love to compare thoughts.",
+  "Currently making my way through The Magic by Rhonda Byrne, one gratitude exercise at a time. Jury's still out on whether it's rewiring my brain or just giving me a very wholesome excuse to journal at 11pm. If you've read it, come tell me, I promise I won't turn it into a TED talk.",
 ];
 
 const BOLD_PHRASES = ['pseudo-perfectionist', 'Crafting pipelines', 'optimizing data flows', 'int i = 10;'];
@@ -256,8 +256,8 @@ const ExpandModal = ({
                 />
               </div>
             )}
-            <div className="relative flex flex-col flex-1 min-h-0 p-8 sm:p-12">
-              <h3 className="text-2xl font-bold text-[#3a2f2f] mb-4 shrink-0">{title}</h3>
+            <div className="relative flex flex-col flex-1 min-h-0 pt-3 sm:pt-4 px-8 sm:px-12 pb-8 sm:pb-12">
+              <h3 className="text-2xl font-bold text-[#3a2f2f] mb-2 shrink-0">{title}</h3>
               <div className="overflow-y-auto scrollbar-hide flex-1 min-h-0 space-y-4">
                 {paragraphs.map((para, pi) => {
                   const paraWords = para.split(' ');
@@ -268,7 +268,7 @@ const ExpandModal = ({
                   const revealed = paraWords.slice(0, availableForThisPara).join(' ');
                   const isLastVisible = count < totalWords && availableForThisPara < paraWords.length;
                   return (
-                    <p key={pi} className="text-[#3a2f2f] text-base sm:text-lg leading-relaxed">
+                    <p key={pi} className="text-[#3a2f2f] text-base sm:text-lg leading-relaxed text-justify">
                       {renderWithBold(revealed)}
                       {isLastVisible && <span className="opacity-50">▍</span>}
                     </p>
@@ -405,7 +405,7 @@ const ScratchCard = ({ className }: { className?: string }) => {
   );
 };
 
-const CertCard = ({ title, img, alt, className, imgScale = 1 }: { title: string; img: string; alt: string; className?: string; imgScale?: number }) => (
+const CertCard = ({ title, img, alt, className, imgScale = 1, imgOffsetX = 0 }: { title: string; img: string; alt: string; className?: string; imgScale?: number; imgOffsetX?: number }) => (
   <motion.div
     {...cardMotionProps}
     className={`rounded-xl border border-white/10 p-4 flex flex-col items-center bg-[#f3ede1] relative overflow-hidden group h-full ${className ?? ''}`}
@@ -416,13 +416,13 @@ const CertCard = ({ title, img, alt, className, imgScale = 1 }: { title: string;
       src={`${BASE}${img}`}
       alt={alt}
       className="flex-1 w-full min-h-0 object-contain"
-      style={{ mixBlendMode: 'multiply', transform: `scale(${imgScale})` }}
+      style={{ mixBlendMode: 'multiply', transform: `translateX(${imgOffsetX}%) scale(${imgScale})` }}
     />
   </motion.div>
 );
 
 const ToolsMarquee = () => (
-  <motion.div {...cardMotionProps} className={`${cardBase} col-span-4 row-span-1 py-5 gap-3 overflow-hidden justify-center`}>
+  <motion.div {...cardMotionProps} className={`${cardBase} col-span-2 lg:col-span-4 row-span-1 py-5 gap-3 overflow-hidden justify-center`}>
     <CardEffects />
     <span className={cardTitle}>Tools &amp; Skills</span>
     {[TOOLS_ROW_1, TOOLS_ROW_2].map((row, rowIdx) => (
@@ -473,6 +473,7 @@ const Dashboard = () => {
             img="AWSDataEngineer.png"
             alt="AWS Certified Data Engineer Associate"
             imgScale={1.45}
+            imgOffsetX={4.8}
           />
 
           <ScratchCard className="row-span-2" />
@@ -540,7 +541,7 @@ const Dashboard = () => {
           >
             <CardEffects />
             <span className={`${cardTitle} mb-2`}>Why This?</span>
-            <p className="text-gray-300 text-sm leading-relaxed line-clamp-2">
+            <p className="text-gray-300 text-sm leading-relaxed line-clamp-2 text-justify">
               {ABOUT_ME_PARAGRAPHS[0]}
             </p>
             <span className="text-[#c9b694] text-xs mt-2 font-medium">Click to read more →</span>

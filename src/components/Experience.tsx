@@ -273,7 +273,7 @@ const Experience = () => {
 
                     <div className="space-y-4">
                       {entry.narrative.map((paragraph, idx) => (
-                        <p key={idx} className="text-gray-300 text-lg leading-relaxed">
+                        <p key={idx} className="text-gray-300 text-lg leading-relaxed text-justify">
                           {paragraph}
                         </p>
                       ))}

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 
@@ -122,6 +122,8 @@ const CardEffects = () => (
 );
 
 const Projects = () => {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
   return (
     <section id="projects" className="min-h-screen py-24 relative overflow-hidden">
       <div className="w-full px-8 xl:px-12">
@@ -137,15 +139,29 @@ const Projects = () => {
 
         {/* Projects Grid — all 3 fit in one row on desktop, full-width to match Dashboard/Hero */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {projects.map((project, index) => {
+            const isSelected = selectedId === project.id;
+            const isOtherSelected = selectedId !== null && !isSelected;
+            return (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: (index % 2) * 0.15 }}
-              whileHover={{ y: -8 }}
-              className="group relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden flex flex-col"
+              style={{ zIndex: isSelected ? 20 : 1 }}
+            >
+            <motion.div
+              whileHover={!selectedId ? { y: -8 } : {}}
+              onClick={() => setSelectedId((cur) => (cur === project.id ? null : project.id))}
+              animate={{
+                scale: isSelected ? 1.06 : isOtherSelected ? 0.94 : 1,
+                filter: isOtherSelected ? 'blur(5px)' : 'blur(0px)',
+                opacity: isOtherSelected ? 0.55 : 1,
+                rotate: isSelected ? [0, -2.5, 2.5, -1.5, 0] : 0,
+              }}
+              transition={{ duration: 0.45, ease: 'easeInOut' }}
+              className="group relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden flex flex-col cursor-pointer"
             >
               <CardEffects />
 
@@ -167,7 +183,7 @@ const Projects = () => {
                   {project.title}
                 </h3>
 
-                <p className="text-gray-300 text-base leading-relaxed mb-6 flex-1">
+                <p className="text-gray-300 text-base leading-relaxed mb-6 flex-1 text-justify">
                   {project.description}
                 </p>
 
@@ -190,6 +206,7 @@ const Projects = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="text-white hover:text-[#c9b694] transition-colors flex items-center gap-2 group/link"
                     >
                       <Github size={20} />
@@ -202,6 +219,7 @@ const Projects = () => {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="text-white hover:text-[#c9b694] transition-colors flex items-center gap-2 group/link"
                     >
                       <ExternalLink size={20} />
@@ -212,7 +230,9 @@ const Projects = () => {
                 </div>
               </div>
             </motion.div>
-          ))}
+            </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

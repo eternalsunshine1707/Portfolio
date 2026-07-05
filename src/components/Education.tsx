@@ -298,7 +298,7 @@ const Education = () => {
                                 <span className="w-1.5 h-1.5 rounded-full bg-[#c9b694] mt-1.5 mr-2 flex-shrink-0" />
                                 <div>
                                   <span className="font-medium">{course.name}</span>
-                                  <p className="text-gray-400 mt-1">{course.description}</p>
+                                  <p className="text-gray-400 mt-1 text-justify">{course.description}</p>
                                 </div>
                               </div>
                             </li>

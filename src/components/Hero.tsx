@@ -5,26 +5,6 @@ import { CURTAIN_TOTAL_MS } from './CurtainOverlay';
 
 const BASE = import.meta.env.BASE_URL;
 
-/** Cursor-following beige glow, shown on hover — same pattern used site-wide */
-const HoverGlow = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
-    el.style.setProperty('--my', `${e.clientY - rect.top}px`);
-  };
-  return (
-    <div ref={ref} onMouseMove={handleMove} className="absolute inset-0 pointer-events-none rounded-lg overflow-hidden z-0">
-      <span
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: 'radial-gradient(60px circle at var(--mx, 50%) var(--my, 50%), rgba(201,182,148,0.45), transparent 70%)' }}
-      />
-    </div>
-  );
-};
-
 interface Metric {
   label: string;
   value: number;
@@ -218,6 +198,9 @@ const Hero = () => {
   const [terminalVisible, setTerminalVisible] = useState(false);
   const [imageFlipped, setImageFlipped] = useState(false);
   const [selectedMetric, setSelectedMetric] = useState<number | null>(null);
+  const [emailPop, setEmailPop] = useState(0);
+  const [linkedinPop, setLinkedinPop] = useState(0);
+  const [githubPop, setGithubPop] = useState(0);
   const roles = Object.keys(sravani).filter(key => key !== 'loading');
 
   // Controls for the right-side box — starts hidden, triggered after left finishes
@@ -273,7 +256,7 @@ const Hero = () => {
               </span>
             </motion.h1>
 
-            <div className="space-y-6 text-xl text-gray-300 leading-relaxed mb-12 max-w-3xl">
+            <div className="space-y-6 text-xl text-gray-300 leading-relaxed mb-12 max-w-3xl text-justify">
               <motion.p
                 initial={{ y: 24 }}
                 animate={{ y: 0 }}
@@ -300,17 +283,24 @@ const Hero = () => {
               <div className="flex items-center gap-4">
                 <motion.a
                   href="mailto:sravanistar99@gmail.com"
+                  onClick={() => setEmailPop((p) => p + 1)}
                   className="p-3 bg-white/5 hover:bg-white/10 rounded-lg transition-colors relative group"
                   whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.95 }}
                 >
-                  <HoverGlow />
-                  <svg className="w-6 h-6 relative" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                  <motion.svg
+                    key={emailPop}
+                    className="w-6 h-6 relative"
+                    viewBox="0 0 512 512"
+                    xmlns="http://www.w3.org/2000/svg"
+                    initial={{ scale: 1, rotate: 0 }}
+                    animate={emailPop > 0 ? { scale: [1, 1.45, 0.9, 1.15, 1], rotate: [0, -18, 14, -8, 0] } : {}}
+                    transition={{ duration: 0.55, ease: 'easeInOut' }}
+                  >
                     <path
                       fill="#EA4335"
                       d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805l-208 157.459L48 152.805V112h416zM48 400V198.195l208 157.459 208-157.459V400H48z"
                     />
-                  </svg>
+                  </motion.svg>
                   <motion.span
                     className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-white opacity-0 group-hover:opacity-100 whitespace-nowrap bg-dark-950/80 px-2 py-1 rounded"
                     initial={{ y: 10 }}
@@ -324,14 +314,22 @@ const Hero = () => {
                   href="https://www.linkedin.com/in/sravaniofficial/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => setLinkedinPop((p) => p + 1)}
                   className="p-3 bg-white/5 hover:bg-white/10 rounded-lg transition-colors relative group"
                   whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.95 }}
                 >
-                  <HoverGlow />
-                  <svg className="w-6 h-6 relative" fill="#0A66C2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <motion.svg
+                    key={linkedinPop}
+                    className="w-6 h-6 relative"
+                    fill="#0A66C2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    initial={{ scale: 1, rotate: 0 }}
+                    animate={linkedinPop > 0 ? { scale: [1, 1.45, 0.9, 1.15, 1], rotate: [0, -18, 14, -8, 0] } : {}}
+                    transition={{ duration: 0.55, ease: 'easeInOut' }}
+                  >
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
+                  </motion.svg>
                   <motion.span
                     className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-white opacity-0 group-hover:opacity-100 whitespace-nowrap bg-dark-950/80 px-2 py-1 rounded"
                     initial={{ y: 10 }}
@@ -345,12 +343,19 @@ const Hero = () => {
                   href="https://github.com/eternalsunshine1707"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => setGithubPop((p) => p + 1)}
                   className="p-3 bg-white/5 hover:bg-white/10 rounded-lg text-white hover:text-[#6bab8a] transition-colors relative group"
                   whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.95 }}
                 >
-                  <HoverGlow />
-                  <Github className="w-6 h-6 relative" />
+                  <motion.span
+                    key={githubPop}
+                    className="block relative"
+                    initial={{ scale: 1, rotate: 0 }}
+                    animate={githubPop > 0 ? { scale: [1, 1.45, 0.9, 1.15, 1], rotate: [0, -18, 14, -8, 0] } : {}}
+                    transition={{ duration: 0.55, ease: 'easeInOut' }}
+                  >
+                    <Github className="w-6 h-6" />
+                  </motion.span>
                   <motion.span
                     className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-white opacity-0 group-hover:opacity-100 whitespace-nowrap bg-dark-950/80 px-2 py-1 rounded"
                     initial={{ y: 10 }}
@@ -367,7 +372,7 @@ const Hero = () => {
             </motion.div>
 
             {/* ── IMPACT METRICS ── */}
-            <div className="flex flex-nowrap items-start gap-4 lg:gap-6 mt-14 w-full">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-nowrap items-start gap-x-4 gap-y-6 lg:gap-6 mt-14 w-full">
               {METRICS.map((metric, index) => (
                 <CountUpMetric
                   key={metric.label}
